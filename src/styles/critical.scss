@@ -13,10 +13,10 @@
     }
 }
 
-@include font-face("Monserrat", "Monserrat-Regular", 400, normal);
-@include font-face("Monserrat", "Monserrat-Medium", 500, normal);
-@include font-face("Monserrat", "Monserrat-Medium", 600, normal);
-@include font-face("Monserrat", "Monserrat-Bold", 700, normal);
+@include font-face("Montserrat", "Montserrat-Regular", 400, normal);
+@include font-face("Montserrat", "Montserrat-Medium", 500, normal);
+@include font-face("Montserrat", "Montserrat-Medium", 600, normal);
+@include font-face("Montserrat", "Montserrat-Bold", 700, normal);
 @include font-face("Moul", "Moul-Regular", 400, normal);
 
 
@@ -26,20 +26,85 @@
     --color-black: #212121;
     --color-primary:#D98C72;
     --color-back:#F2ECE1;
+    --color-light: #FAF7F3;
     --Montserrat: 'Montserrat', sans-serif;
     --Moul: 'Moul', sans-serif;
 }
-/* base styles*/
+
 *,*:before,
 *:after {
     box-sizing: border-box;
     outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 *,body,html {
     -webkit-text-size-adjust: none;
     -webkit-appearance: none;
 }
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+button{
+    border:none;
+}
+mark{
+    -webkit-text-fill-color: initial;
+    text-fill-color: transparent;
+    background: none;
+}
+
+.img{
+    &.contain img{
+        object-fit: contain;
+    }
+    & > img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+ul {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+    &:hover{
+        text-decoration: none;
+    }
+}
+h1{
+    margin: 0;
+}
 html {
-    height:100%;
     font-size: 10px;
+    scroll-behavior: smooth;
+
+}
+@media only screen and (max-width: 1024px) {
+    html {
+        font-size: 8px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    html {
+        font-size: 6px;
+    }
+}
+
+@media only screen and (max-width: 666px) {
+    html {
+        font-size: 10px;
+    }
 }
