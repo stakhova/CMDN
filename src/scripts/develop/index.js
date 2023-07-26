@@ -12,6 +12,8 @@ function changeToMob(){
 
 }
 
+
+
 const main = new Swiper('.main__block .swiper-container', {
     slidesPerView: 1,
     spaceBetween: 60,
