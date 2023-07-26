@@ -10,10 +10,88 @@ function changeToMob(){
         $('.header__menu .header__logo').closest('li').remove()
         $('.music__more').text('Go to the all posts')
 
+
+        $('.posts__slider').each(function() {
+            console.log(333,this)
+            new Swiper(this, {
+                slidesPerView: 1.3,
+                spaceBetween: 10,
+                centeredSlides: true,
+                loop: true,
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }
 
+//
+// function mySwiper() {
+//
+//     // Variables
+//
+//     // var $swiperContainer = $(".swiper-js-container");
+//
+//
+//     function init($this) {
+//
+//         // Swiper elements
+//
+//         var $el = $('.swiper-container')
+//
+//
+//
+//         var $swiper = new Swiper($el, {
+//             slidesPerView: 1,
+//             spaceBetween: 10,
+//             loop: true,
+//             breakpoints: {
+//                 767: {
+//                     slidesPerView: 1
+//                 },
+//                 1024: {
+//                     slidesPerView: 2
+//                 },
+//                 1270: {
+//                     slidesPerView: 1
+//                 }
+//             },
+//             pagination: {
+//                 el: pagination,
+//                 clickable: true,
+//                 type: paginationType
+//             },
+//             navigation: {
+//                 nextEl: navNext,
+//                 prevEl: navPrev,
+//             }
+//         });
+//
+//     }
+//
+//     // Events
+//     //$(document).ready(function() {
+//     if ($el.length) {
+//         $el.each(function(i, Slider) {
+//             init($(Slider));
+//         })
+//     }
+//     //});
+//
+//
+// };
 const validateForm = (form, func) => {
     form.on("submit", function (e) {
         e.preventDefault();
@@ -159,6 +237,7 @@ const main = new Swiper('.main__slider', {
 
 
 
+
 function toogleModalWithoutClick(modal, func) {
     modal.show();
     $('body').css('overflow', 'hidden');
@@ -188,23 +267,28 @@ function toogleModalWithoutClick(modal, func) {
 
 
 function tabsPosts() {
-
     $(".posts__tab .tab").click(function () {
         $(".posts__tab .tab").removeClass("active").eq($(this).index()).addClass("active");
         $(".posts__tab-item").hide().eq($(this).index()).fadeIn();
-        let currentYear = $(this).text()
-        $('.posts__currentYear').text(currentYear)
+        if (window.innerWidth <= 666) {
+            $('.posts__slider').each(function() {
+                new Swiper(this, {
+                    slidesPerView: 1.3,
+                    spaceBetween: 10,
+                    centeredSlides: true,
+                    loop: true,
+                });
+            });
+        }
 
     }).eq(0).addClass("active");
-    let currentYear = $(".posts__tab .tab:first-child").text()
+
 }
 
 $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
     changeToMob()
     tabsPosts()
-
-
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');
     validateForm(subsForm, function () {
@@ -213,7 +297,6 @@ $(document).ready(function(){
         toogleModalWithoutClick(subsModal)
 
     });
-
 });
 
 $(window).load(function(){
