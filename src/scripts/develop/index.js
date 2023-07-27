@@ -9,32 +9,55 @@ function changeToMob(){
     if (window.innerWidth <= 666) {
         $('.header__menu .header__logo').closest('li').remove()
         $('.music__more').text('Go to the all posts')
+        initSlider()
 
-
-        $('.posts__slider').each(function() {
-            console.log(333,this)
-            new Swiper(this, {
-                slidesPerView: 1.3,
-                spaceBetween: 10,
-                centeredSlides: true,
-                loop: true,
-            });
-        });
-
-
-
-
-
-
-
-
-
-
-
-
+        // $('.posts__slider').each(function() {
+        //     console.log(333,this)
+        //     new Swiper(this, {
+        //         slidesPerView: 1.3,
+        //         spaceBetween: 10,
+        //         centeredSlides: true,
+        //         loop: true,
+        //     });
+        // });
 
     }
 
+}
+
+
+
+
+
+function initSlider () {
+    // const swipers = $(`.${slider}`);
+    $('.posts__slider').each(function() {
+        new Swiper(this, {
+            slidesPerView: 1.3,
+            spaceBetween: 10,
+            centeredSlides: false,
+            loop: true,
+        });
+    });
+    // swipers.each(function () {
+    //     const ths = $(this);
+    //     const id = ths.attr('id');
+    //
+    //     new Swiper(`.${id}`, {
+    //         slidesPerView: 1.3,
+    //         watchOverflow: true,
+    //         spaceBetween: 10,
+    //         speed: 300,
+    //         slidesPerGroup: 1,
+    //         centeredSlides: false,
+    //
+    //         loop:true,
+    //         pagination: {
+    //             el: `.${id}__swiper-pagination`,
+    //         },
+    //     });
+    //
+    // });
 }
 
 //
@@ -271,14 +294,15 @@ function tabsPosts() {
         $(".posts__tab .tab").removeClass("active").eq($(this).index()).addClass("active");
         $(".posts__tab-item").hide().eq($(this).index()).fadeIn();
         if (window.innerWidth <= 666) {
-            $('.posts__slider').each(function() {
-                new Swiper(this, {
-                    slidesPerView: 1.3,
-                    spaceBetween: 10,
-                    centeredSlides: true,
-                    loop: true,
-                });
-            });
+            // $('.posts__slider').each(function() {
+            //     new Swiper(this, {
+            //         slidesPerView: 1.3,
+            //         spaceBetween: 10,
+            //         centeredSlides: true,
+            //         loop: true,
+            //     });
+            // });
+            initSlider()
         }
 
     }).eq(0).addClass("active");
@@ -297,6 +321,7 @@ $(document).ready(function(){
         toogleModalWithoutClick(subsModal)
 
     });
+
 });
 
 $(window).load(function(){
