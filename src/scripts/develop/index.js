@@ -5,27 +5,24 @@ const openMenu = () => {
     $('body').toggleClass('hidden');
 };
 
-function changeToMob(){
+function changeToMob() {
     if (window.innerWidth <= 666) {
         $('.header__menu .header__logo').closest('li').remove()
         $('.music__more').text('Go to the all posts')
         initSlider()
         let breadcrumbs = $('.breadcrumbs')
         $('.delivery').prepend(breadcrumbs)
-        // $('.posts__slider').each(function() {
-        //     console.log(333,this)
-        //     new Swiper(this, {
-        //         slidesPerView: 1.3,
-        //         spaceBetween: 10,
-        //         centeredSlides: true,
-        //         loop: true,
-        //     });
-        // });
 
     }
 
 }
 
+function filterActiveOne (item) {
+    item.click(function () {
+        $(this).toggleClass('active');
+        console.log(1234)
+    });
+};
 
 
 
@@ -332,8 +329,7 @@ $(document).ready(function(){
     });
     $('.filter__select').select2({});
     changeFilter()
-
-
+    filterActiveOne ($('.tickets__categories > *'))
 });
 
 $(window).load(function(){

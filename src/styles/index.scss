@@ -919,6 +919,7 @@
 .tickets{
   .container{
     padding: 2rem 5.5rem 3rem;
+    position: relative;
     &:after{
       content: "";
       bottom: 0;
@@ -931,6 +932,9 @@
       pointer-events: none;
     }
   }
+  &__filter{
+    margin-bottom: 3rem;
+  }
   &__categories{
     display: flex;
     gap:1rem;
@@ -942,6 +946,10 @@
       text-transform: uppercase;
       color: var(--color-primary);
       position: relative;
+      &.active{
+        background-color: var(--color-primary);
+        color: var(--color-white);
+      }
       &:after{
         content: "";
         top: 0;
@@ -1161,7 +1169,7 @@
         content: "";
         position: absolute;
         top: 50%;
-        left: 0;
+        left: 1.4rem;
         transform: translateY(-50%);
         width: 2rem;
         height: 2rem;
@@ -1240,6 +1248,37 @@
   }
 }
 
+.select2-container--default .select2-selection--single{
+  background-color: transparent;
+  border: 0.2rem solid var(--color-black);
+  border-radius: 0;
+  height: auto;
+}
+.select2-container .select2-selection--single .select2-selection__rendered{
+  padding: 2rem 2rem 2rem 4.2rem;
+  font: 600 1.6rem/2rem var(--Montserrat);
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+  top:50%;
+  transform: translateY(-50%);
+  right: 1.4rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow:after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 1.2rem;
+  height: 1.2rem;
+  background: url("../img/arr-down.svg") center/1.2rem 1.2rem no-repeat;
+  z-index: 1;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b{
+  display: none;
+}
 
 label.error{
   position: absolute;
