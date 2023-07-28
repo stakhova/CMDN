@@ -10,7 +10,8 @@ function changeToMob(){
         $('.header__menu .header__logo').closest('li').remove()
         $('.music__more').text('Go to the all posts')
         initSlider()
-
+        let breadcrumbs = $('.breadcrumbs')
+        $('.delivery').prepend(breadcrumbs)
         // $('.posts__slider').each(function() {
         //     console.log(333,this)
         //     new Swiper(this, {
@@ -309,6 +310,14 @@ function tabsPosts() {
 
 }
 
+function changeFilter(){
+    $('.select2-selection__rendered').each(function (){
+        let placeholder = $(this).closest('.filter__item').find('.filter__header').text()
+
+        $(this).text(placeholder)
+    })
+}
+
 $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
     changeToMob()
@@ -321,6 +330,9 @@ $(document).ready(function(){
         toogleModalWithoutClick(subsModal)
 
     });
+    $('.filter__select').select2({});
+    changeFilter()
+
 
 });
 
