@@ -17,7 +17,7 @@ function changeToMob() {
 
 }
 
-function filterActiveOne (item) {
+function filterActive (item) {
     item.click(function () {
         $(this).toggleClass('active');
         console.log(1234)
@@ -313,6 +313,23 @@ function changeFilter(){
     })
 }
 
+function filterActiveOne(){
+    $('.blog__display-item').click(function () {
+        $(this).addClass('active');
+        $(this).prevAll('.blog__display-item').removeClass('active');
+        $(this).nextAll('.blog__display-item').removeClass('active');
+        let list =  $('.blog__list')
+        if($('.blog__display-menu').hasClass('active')){
+            list.addClass('blog__list-menu')
+            list.removeClass('blog__list-list')
+        }
+        if($('.blog__display-list').hasClass('active')){
+            list.addClass('blog__list-list')
+            list.removeClass('blog__list-menu')
+        }
+    });
+};
+
 $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
     changeToMob()
@@ -320,9 +337,10 @@ $(document).ready(function(){
 
     $('.filter__select').select2({});
     changeFilter()
-    filterActiveOne ($('.tickets__categories > *'))
+    filterActive($('.tickets__categories > *'))
     removeNews();
     search()
+    filterActiveOne();
 
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');
