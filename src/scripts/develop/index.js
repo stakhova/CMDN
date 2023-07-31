@@ -25,10 +25,27 @@ function filterActiveOne (item) {
 };
 
 
+function removeNews(){
+    $('.news__block .news__close').click(function (){
+        $(this).closest('.news').hide();
+    })
+}
+
+function search(){
+    let searchForm = $('.header__search-form');
+    let searchButton = $('.header__search');
+    searchButton.click(function (){
+        searchForm.show()
+        $(document).on("click", function(event) {
+            if (!searchForm.is(event.target) && searchForm.has(event.target).length === 0  && !searchButton.is(event.target) && searchButton.has(event.target).length === 0) {
+                searchForm.hide();
+            }
+        });
+    })
+}
 
 
 function initSlider () {
-    // const swipers = $(`.${slider}`);
     $('.posts__slider').each(function() {
         new Swiper(this, {
             slidesPerView: 1.3,
@@ -37,25 +54,6 @@ function initSlider () {
             loop: true,
         });
     });
-    // swipers.each(function () {
-    //     const ths = $(this);
-    //     const id = ths.attr('id');
-    //
-    //     new Swiper(`.${id}`, {
-    //         slidesPerView: 1.3,
-    //         watchOverflow: true,
-    //         spaceBetween: 10,
-    //         speed: 300,
-    //         slidesPerGroup: 1,
-    //         centeredSlides: false,
-    //
-    //         loop:true,
-    //         pagination: {
-    //             el: `.${id}__swiper-pagination`,
-    //         },
-    //     });
-    //
-    // });
 }
 
 //
@@ -319,17 +317,27 @@ $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
     changeToMob()
     tabsPosts()
+
+    $('.filter__select').select2({});
+    changeFilter()
+    filterActiveOne ($('.tickets__categories > *'))
+    removeNews();
+    search()
+
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');
     validateForm(subsForm, function () {
         sendForm(subsForm, '/wp-admin/admin-ajax.php', function (){
         });
         toogleModalWithoutClick(subsModal)
-
     });
-    $('.filter__select').select2({});
-    changeFilter()
-    filterActiveOne ($('.tickets__categories > *'))
+
+    let searchForm = $('.header__search-form')
+    validateForm(searchForm, function () {
+        sendForm(searchForm, '/wp-admin/admin-ajax.php'), function (){
+            $('.header__search-form').hide()
+        }
+    });
 });
 
 $(window).load(function(){
