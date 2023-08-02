@@ -24,30 +24,47 @@
         </section>
         <section class="tickets">
             <div class="container">
-                <div class="tickets__filter filter">
-                    <div class="filter__item filter__sort">
-                        <div class="filter__header ">Sort by</div>
-                        <select class="filter__select " >
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
+                <div class="filter__mob-wrap">
+                    <div class="filter__mob-header">
+                        <a href="" class="filter__mob-logo img">
+                            <img src="img/logo.svg" alt="">
+                        </a>
+                        <div class="filter__mob-close"></div>
                     </div>
-                    <div class="filter__item filter__date">
-                        <div class="filter__header ">Date</div>
-                        <select class="filter__select">
-                            <option value="1">11</option>
-                            <option value="2">22</option>
-                            <option value="3">33</option>
-                        </select>
+                    <div class="filter__mob">
+                        <button class="filter__mob-event">
+                            Filter event
+                        </button>
                     </div>
-                    <div class="filter__item filter__venue">
-                        <div class="filter__header">Venue</div>
-                        <select class="filter__select">
-                            <option value="1">111</option>
-                            <option value="2">222</option>
-                            <option value="3">333</option>
-                        </select>
+                    <div class="tickets__filter filter">
+                        <div class="filter__item filter__sort">
+                            <div class="filter__header">Sort by</div>
+                            <input type="text" hidden>
+                            <div class="filter__inner">
+                                <div class="filter__inner-item">Latest</div>
+                                <div class="filter__inner-item">Low price to High price</div>
+                                <div class="filter__inner-item">High price to Low price</div>
+                                <div class="filter__inner-item">Popular</div>
+                                <div class="filter__inner-item">Recommended</div>
+                            </div>
+                        </div>
+                        <div class="filter__item filter__date">
+                            <div class="filter__datepicker-wrap ">
+                                <input type="text" class="filter__datepicker" value="Date" >
+                            </div>
+                        </div>
+                        <div class="filter__item filter__venue">
+                            <div class="filter__header">Venue</div>
+                            <select class="filter__select">
+                                <option value="1">111</option>
+                                <option value="2">222</option>
+                                <option value="3">333</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter__mob-button">
+                        <button class="section__button filter__mob-show">Show (100)</button>
+                        <button class="filter__mob-reset">Reset changes</button>
                     </div>
                 </div>
                 <h3 class="tickets__categories-title">Categories</h3>

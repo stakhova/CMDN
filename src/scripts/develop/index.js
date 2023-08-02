@@ -12,11 +12,17 @@ function changeToMob() {
         initSlider()
         let breadcrumbs = $('.breadcrumbs')
         $('.delivery').prepend(breadcrumbs)
+        $('.article__social-wrap').prepend("<div class='article__social-button'></div>")
 
     }
 
 }
 
+function showSocial(){
+    $(document).on('click','.article__social-wrap', function (){
+        $('.article__social').toggle()
+    })
+}
 function filterActive (item) {
     item.click(function () {
         $(this).toggleClass('active');
@@ -330,17 +336,66 @@ function filterActiveOne(){
     });
 };
 
+function calendar(){
+    $(".filter__datepicker").datepicker();
+}
+
+function dropDown(){
+    if (window.innerWidth > 666) {
+        $(document).on('click', '.filter__sort', function () {
+            $(this).find('.filter__inner').toggle()
+        })
+    }
+    $('.filter__inner-item').each(function () {
+        $(this).click(function () {
+            $(this).addClass('active');
+            $(this).prevAll('.filter__inner-item').removeClass('active');
+            $(this).nextAll('.filter__inner-item').removeClass('active');
+            let current = $(this).text()
+            $(this).closest('.filter__item ').find('input').val(current)
+            if (window.innerWidth > 666) {
+                $(this).closest('.filter__item ').find('.filter__header').text(current)
+            }
+        });
+    })
+    // if (window.innerWidth < 666) {
+    //     $('.filter__inner-item').click(function () {
+    //         $(this).addClass('active');
+    //         $(this).prevAll('.filter__inner-item').removeClass('active');
+    //         $(this).nextAll('.filter__inner-item').removeClass('active');
+    //     })
+    // }
+}
+
+function filterMob(){
+    $('.filter__mob').click(function (){
+        $('.filter__mob-wrap').addClass('active')
+        $('.hidden').addClass('hidden')
+    })
+    $(document).on('click','.filter__mob-close', function (){
+        $('.filter__mob-wrap').removeClass('active')
+    })
+
+}
+
 $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
     changeToMob()
     tabsPosts()
+    filterMob()
+    $('.filter__select').select2({
 
-    $('.filter__select').select2({});
+    }).on('select2:opening', function(e) {
+        $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', 'Search')
+    })
     changeFilter()
     filterActive($('.tickets__categories > *'))
     removeNews();
     search()
     filterActiveOne();
+    showSocial()
+    calendar()
+    dropDown()
 
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');
@@ -356,6 +411,7 @@ $(document).ready(function(){
             $('.header__search-form').hide()
         }
     });
+
 });
 
 $(window).load(function(){
