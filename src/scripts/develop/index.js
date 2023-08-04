@@ -14,6 +14,32 @@ function changeToMob() {
         $('.delivery').prepend(breadcrumbs)
         $('.article__social-wrap').prepend("<div class='article__social-button'></div>")
 
+        const recommended = new Swiper('.article__recommended-slider', {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+            centeredSlides: false,
+
+            loop: true,
+            navigation: {
+                nextEl: ".main__next",
+                prevEl: ".main__prev"
+            }
+
+        });
+        const related = new Swiper('.related-slider', {
+            slidesPerView: 1.5,
+            spaceBetween: 20,
+            centeredSlides: false,
+
+            loop: true,
+            navigation: {
+                nextEl: ".main__next",
+                prevEl: ".main__prev"
+            }
+
+        });
+
+
     }
 
 }
@@ -30,6 +56,16 @@ function filterActive (item) {
     });
 };
 
+
+function goBack(){
+    $('.article__back').click(function () {
+        if( window.history.length == 0){
+            window.location.href = '/'
+        }
+        history.back()
+    })
+
+}
 
 function removeNews(){
     $('.news__block .news__close').click(function (){
@@ -396,6 +432,7 @@ $(document).ready(function(){
     showSocial()
     calendar()
     dropDown()
+    goBack()
 
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');

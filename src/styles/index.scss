@@ -1243,9 +1243,10 @@
   position: absolute;
   top:1.6rem;
   left: 5.5rem;
+
   & > *{
     position: relative;
-    font: 400 1.4rem/1.7rem var(--Montserrat);
+    font: 500 1.4rem/1.7rem var(--Montserrat);
     color: var(--color-white);
     transition: 0.2s all ease;
     &:hover{
@@ -1261,6 +1262,19 @@
       right: -1rem;
       transform: translateY(-50%);
       z-index: 1;
+    }
+  }
+  &__relative{
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 1.6rem 0;
+    &>*{
+      color: var(--color-black);
+      &:not(:last-child):after{
+        color: var(--color-black);
+
+      }
     }
   }
 }
@@ -1682,7 +1696,6 @@
     width: calc((100% - 6rem)/3);
     display: flex;
     flex-direction: column;
-    gap:1rem;
     position: relative;
     &-flash{
       position: absolute;
@@ -1709,8 +1722,8 @@
         left: 0;
         position: absolute;
         width: 100%;
-        height: 0.1rem;
-        border-bottom: 0.2rem solid var(--color-black);
+        height: 100%;
+        border: 0.2rem solid var(--color-black);
         pointer-events: none;
       }
     }
@@ -1723,11 +1736,20 @@
     }
     &-desc{
       font: 500 1.6rem/160% var(--Montserrat);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
     }
     &-link{
       text-transform: uppercase;
       font: 600 1.4rem/1.7rem var(--Montserrat);
       color: var(--color-primary);
+      transition: 0.2s all ease;
+      &:hover{
+        transition: 0.2s all ease;
+        text-decoration: underline;
+      }
     }
   }
   &__display{
@@ -1764,11 +1786,35 @@
 }
 
 .article{
+  .container{
+    position: relative;
+  }
+  &__back{
+    position:absolute ;
+    left: 5.5rem;
+    top: 0;
+    font: 600 1.4rem/1.7rem var(--Montserrat);
+    button{
+      position: relative;
+      padding-left: 1.3rem;
+      &:after{
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%) rotate(90deg);
+        width: 0.9rem;
+        height: 0.9rem;
+        background: url(../img/arr-down.svg) center/0.9rem 0.9rem no-repeat;
+        z-index: 1;
+      }
+    }
+  }
   &__container{
     max-width: 77rem;
     width: 100%;
     margin: 0 auto;
-    padding: 1.6rem 0 7rem;
+    padding: 0 0 7rem;
   }
   &__img{
     margin-bottom: 1.6rem;
@@ -1780,9 +1826,13 @@
     display: flex;
     gap:1.4rem;
     margin-bottom: 1.6rem;
+    align-items: center;
+    & > span{
+      font: 600 1.4rem/1.7rem var(--Montserrat);
+    }
     &-item{
-      width: 2rem;
-      height: 2rem;
+      width: 1.4rem;
+      height: 1.4rem;
     }
   }
   &__categories{
@@ -1809,40 +1859,49 @@
   &__content{
     padding-bottom:2rem;
     border-bottom: 0.2rem solid var(--color-back-dark);
-    h1{
+    & > img{
+      margin: 3rem 0;
+      max-width: 100%;
+      max-width: 100%;
+    }
+    & > h1{
       font: 400 3.6rem/6.5rem var(--Moul);
       text-transform: uppercase;
       margin-bottom:2rem ;
       text-align: center;
     }
-    h2{
+    & > h2{
       font: 400 2.4rem/4.3rem var(--Moul);
       margin:2rem 0;
       text-align: center;
     }
-    h3{
+    & > h3{
       font: 400 2.25rem/160% var(--Moul);
       margin:2rem 0;
       text-align: center;
     }
-    h4{
+    & > h4{
       font: 400 2.1rem/160% var(--Moul);
       margin:2rem 0;
       text-align: center;
     }
-    h5{
+    & > h5{
       font: 400 1.95rem/160% var(--Moul);
       margin:2rem 0;
       text-align: center;
     }
-    h6{
+    & > h6{
       font: 400 1.8rem/160%var(--Moul);
       margin:2rem 0;
       text-align: center;
     }
-    p{
+    & > p{
       font: 500 1.6rem/160% var(--Montserrat);
       margin-bottom:1rem ;
+    }
+    strong{
+      text-decoration: underline;
+      font-weight: 600;
     }
     blockquote{
       padding: 3rem 1rem;
@@ -1876,8 +1935,33 @@
         text-decoration: underline;
       }
     }
+    .article__recommended{
+      padding-bottom: 5rem;
+      border-bottom: 0.2rem solid #E5D9C3;
+      border-top: 0.2rem solid #E5D9C3;
+      margin-bottom: 3rem;
+      .section__title {
+        font-size: 3.6rem;
+        line-height: 160%;
+        margin: 3rem auto 1rem;
+      }
+      .section__button{
+        color: var(--color-white);
+        background-color: var(--color-primary);
+        font-weight: 600;
+        font-size: 1.6rem;
+        line-height: 2rem;
+        padding: 2rem 8rem;
+        &:after{
+          display: none;
+        }
+      }
+    }
+    .adv{
+      margin: 5rem 0;
+    }
   }
-  &__recomended{
+  &__recommended{
     .section__title{
       font-size: 2.4rem;
       line-height: 160%;
@@ -1887,6 +1971,9 @@
       display: flex;
       gap:3rem ;
       margin-bottom: 3rem;
+       .blog__item-img:after{
+         display: none;
+       }
     }
     .blog__item{
       width: calc(50% - 1.5rem);
@@ -1896,7 +1983,83 @@
     }
   }
 }
+.venues{
+  &__container{
+    max-width: 77rem;
+    margin: 0 auto;
+  }
+  .section__title{
+    margin: 3.6rem 0 3rem;
+  }
+  &__text{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    p{
+      font: 500 1.6rem/160% var(--Montserrat);
+    }
+    strong{
+      font: 600 1.6rem/2rem var(--Montserrat);
+    }
+    a{
+      text-decoration: underline;
+    }
+  }
+  &__list{
+    margin: 3rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+  }
+  &__img{
+    width: 100%;
+    height: 43.1rem ;
+    margin-bottom: 3rem;
+  }
+  &__title{
+    font: 400 2.4rem/4.3rem var(--Moul);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  &__desc{
+    font: 500 1.6rem/160% var(--Montserrat);
+    margin-bottom: 1.6rem;
+  }
+  &__link{
+    font: 700 1.4rem/1.7rem var(--Montserrat);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    transition: 0.2s all ease;
+    &:hover{
+      transition: 0.2s all ease;
+      text-decoration: underline;
+    }
+  }
+}
+.venue{
+  .article__container{
+    padding-bottom: 0;
+  }
+}
+.related{
+  &__container{
+    max-width: 77rem;
+    margin: 0 auto;
+  }
+  .section__title{
+    margin-bottom: 3rem;
+  }
+  .tickets__item{
+    width: calc(50% - 1.5rem);
+    &:last-child {
+      display: block;
+    }
+  }
+  &__view{
+    margin: 3rem auto 2rem   ;
+  }
 
+}
 //.ticker-title {
 //  width: 2500px;
 //  padding: 1rem;
@@ -2424,7 +2587,6 @@ label.error{
     top: 0;
     left: 0;
     padding: 1rem 1.6rem;
-
   }
   .breadcrumbs>*{
     font-size: 1rem;
@@ -2848,6 +3010,63 @@ label.error{
         width: 100%;
       }
     }
+  }
+  .breadcrumbs__wrap .container{
+    padding: 0;
+  }
+  .venues .section__title{
+    margin:  0 0 1.4rem ;
+  }
+  .breadcrumbs__dark{
+    background-color: #EAE1CF;;
+  }
+  .venues__text strong,.venues__text p{
+    font-size: 1.4rem;
+    line-height: 160%;
+  }
+  .venues .container{
+    padding-bottom: 0;
+  }
+  .venues__list{
+    margin-top: 2rem;
+    gap:2rem;
+  }
+  .venues__img{
+    width: 100vw;
+    margin: 0 -1.6rem 2rem;
+    height: 56vw;
+  }
+  .venues__title{
+    font-size: 1.8rem;
+    line-height: 3.3rem;
+    margin-bottom: 1.4rem;
+  }
+  .venues__desc{
+    font-size: 1.4rem;
+    margin-bottom: 1.6rem;
+
+  }
+  .article__recommended-list{
+    gap:0
+  }
+  .article__recommended .blog__item-img{
+    height: 36vw;
+  }
+  .blog__item-desc{
+    -webkit-line-clamp: 6;
+  }
+  .article__recommended .blog__item-link{
+    margin-top: 0.6rem;
+  }
+  .article__view{
+    min-width: 34.3rem;
+  }
+  .related .tickets__list{
+    flex-wrap: nowrap;
+    gap:0;
+  }
+  .related .tickets__img{
+    height: 68vw;
   }
 }
 @media only screen and (max-width: 374px) {
