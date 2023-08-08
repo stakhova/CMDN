@@ -24,48 +24,54 @@
         </section>
         <section class="tickets">
             <div class="container">
-                <div class="filter__mob-wrap">
-                    <div class="filter__mob-header">
-                        <a href="" class="filter__mob-logo img">
-                            <img src="img/logo.svg" alt="">
-                        </a>
-                        <div class="filter__mob-close"></div>
-                    </div>
-                    <div class="filter__mob">
-                        <button class="filter__mob-event">
-                            Filter event
-                        </button>
-                    </div>
-                    <div class="tickets__filter filter">
-                        <div class="filter__item filter__sort">
-                            <div class="filter__header">Sort by</div>
-                            <input type="text" hidden>
-                            <div class="filter__inner">
-                                <div class="filter__inner-item">Latest</div>
-                                <div class="filter__inner-item">Low price to High price</div>
-                                <div class="filter__inner-item">High price to Low price</div>
-                                <div class="filter__inner-item">Popular</div>
-                                <div class="filter__inner-item">Recommended</div>
+                <div action="" class="filter__mob-wrap">
+                    <form action="" class="filter__form">
+                        <div class="filter__mob-header">
+                            <a href="" class="filter__mob-logo img">
+                                <img src="img/logo.svg" alt="">
+                            </a>
+                            <div class="filter__mob-close"></div>
+                        </div>
+                        <div class="filter__mob">
+                            <button type="button" class="filter__mob-event">
+                                Filter event
+                            </button>
+                        </div>
+                        <div class="tickets__filter filter">
+                            <div class="filter__item filter__sort filter__dropdown">
+                                <div class="filter__header">Sort by</div>
+                                <input type="text" class="filter__sort-input" name="sort" hidden>
+                                <div class="filter__inner">
+                                    <div class="filter__inner-item">Latest</div>
+                                    <div class="filter__inner-item">Low price to High price</div>
+                                    <div class="filter__inner-item">High price to Low price</div>
+                                    <div class="filter__inner-item">Popular</div>
+                                    <div class="filter__inner-item">Recommended</div>
+                                </div>
+                            </div>
+                            <div class="filter__item filter__date">
+                                <div class="filter__datepicker-wrap ">
+                                    <input type="text" name="date" class="filter__datepicker" value="" placeholder="Date" >
+                                </div>
+                            </div>
+                            <div class="filter__item filter__venue">
+                                <div class="filter__header">Venue</div>
+                                <select class="filter__select" name="venue">
+                                    <option value="111">111</option>
+                                    <option value="222">222</option>
+                                    <option value="333">333</option>
+                                    <option value="444">444</option>
+                                    <option value="555">555</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="filter__item filter__date">
-                            <div class="filter__datepicker-wrap ">
-                                <input type="text" class="filter__datepicker" value="Date" >
-                            </div>
+                        <div class="filter__mob-button">
+                            <button type="submit" class="section__button filter__mob-show">Show (100)</button>
+                            <button type="reset" class="filter__mob-reset">Reset changes</button>
                         </div>
-                        <div class="filter__item filter__venue">
-                            <div class="filter__header">Venue</div>
-                            <select class="filter__select">
-                                <option value="1">111</option>
-                                <option value="2">222</option>
-                                <option value="3">333</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="filter__mob-button">
-                        <button class="section__button filter__mob-show">Show (100)</button>
-                        <button class="filter__mob-reset">Reset changes</button>
-                    </div>
+
+                    </form>
+
                 </div>
                 <h3 class="tickets__categories-title">Categories</h3>
                 <div class="tickets__categories">
@@ -94,7 +100,7 @@
                                 <img src="img/rec1.png" alt="">
                             </div>
                             <h4 class="tickets__price">
-                                $1
+                                $ 1
                             </h4>
                             <h3 class="tickets__name">Dublin Castle  n Castle Evening GigDublin Castle Evening Gig</h3>
                         </a>
@@ -154,7 +160,7 @@
                                     <img src="img/rec1.png" alt="">
                                 </div>
                                 <h4 class="tickets__price">
-                                    $1
+                                    $ 1
                                 </h4>
                                 <h3 class="tickets__name">Dublin Castle  n Castle Evening GigDublin Castle Evening Gig</h3>
                             </a>
@@ -319,10 +325,10 @@
                         </li>
 
                     </ul>
-                    <button class="upcoming__load section__button">
+                    <button type="button" class="upcoming__load section__button">
                         Load more
-                    </button>
-                </div>
+                    </du>
+                </button>
             </div>
         </section>
 

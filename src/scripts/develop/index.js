@@ -90,7 +90,7 @@ function search(){
 function initSlider () {
     $('.posts__slider').each(function() {
         new Swiper(this, {
-            slidesPerView: 1.3,
+            slidesPerView: 1.25,
             spaceBetween: 10,
             centeredSlides: false,
             loop: true,
@@ -158,9 +158,9 @@ const validateForm = (form, func) => {
         e.preventDefault();
     });
 
-    // $.validator.addMethod("goodName", function (value, element) {
-    //     return this.optional(element) || /^[\sаА-яЯіІєЄїЇґҐa-zA-Z0-9._-]{2,30}$/i.test(value);
-    // }, "Please");
+    $.validator.addMethod("goodName", function (value, element) {
+        return this.optional(element) || /^[\sаА-яЯіІєЄїЇґҐa-zA-Z0-9._-]{2,30}$/i.test(value);
+    }, "Please enter correct");
 
     $.validator.addMethod("goodEmail", function (value, element) {
         return this.optional(element) || /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,62}$/i.test(value);
@@ -173,16 +173,16 @@ const validateForm = (form, func) => {
 
     form.validate({
         rules: {
-            // name: {
-            //     required: true,
-            //     goodName: true
-            //     // minlength:2,
-            //     // maxLength: 25
-            // },
-            // lastname: {
-            //     required: true,
-            //     goodName: true
-            // },
+            name: {
+                required: true,
+                goodName: true
+                // minlength:2,
+                // maxLength: 25
+            },
+            lastname: {
+                required: true,
+                goodName: true
+            },
             // phone: {
             //     required: true,
             //     goodPhone: true
@@ -193,10 +193,10 @@ const validateForm = (form, func) => {
                 goodEmail: true,
                 email: true
             },
-            // password: {
-            //     required: true,
-            //     minlength: 8
-            // },
+            password: {
+                required: true,
+                minlength: 8
+            },
             // password_confirm: {
             //     required: true,
             //     minlength: 8,
@@ -213,16 +213,16 @@ const validateForm = (form, func) => {
             // }
         },
         messages: {
-            // name: {
-            //     required: "Це поле є обов’язкове",
-            //     minlength: "Ім'я не може бути коротше за 2 букви",
-            //     maxLength: "Ім'я не може бути довше за 25 букви"
-            // },
-            // lastname: {
-            //     required: "Це поле є обов’язкове",
-            //     minlength: "Прізвище не може бути коротше за 2 букви",
-            //     maxLength: "Прізвище не може бути довше за 25 букви"
-            // },
+            name: {
+                required: "This field is required",
+                minlength: "First name can't be shorter than 2 characters",
+                maxLength: "First name can't be longer than 25 characters "
+            },
+            lastname: {
+                required: "This field is required",
+                minlength: "Last name can't be shorter than 2 characters",
+                maxLength: "Last name can't be longer than 25 characters "
+            },
             // phone: {
             //     required: "Це поле є обов’язкове",
             //     phone: "Введіть номер у форматі +380 xxx xx xx"
@@ -231,10 +231,10 @@ const validateForm = (form, func) => {
                 required: "This field is required",
                 email: "Please enter correct email"
             },
-            // password: {
-            //     required: "Це поле є обов’язкове",
-            //     minlength: "Пароль не може бути коротше за 8 символів"
-            // },
+            password: {
+                required: "This field is required",
+                minlength: "Last name can't be shorter than 8 characters",
+            },
             // password_confirm: {
             //     required: "Це поле є обов’язкове",
             //     equalTo: "Паролі не співпадають",
@@ -296,7 +296,70 @@ const main = new Swiper('.main__slider', {
 
 });
 
+// show&hide password
+function showPassword() {
+    $('.modal__form-eye').click(function (e) {
+        $(this).toggleClass('active');
+        $(this).hasClass('active') ? $(this).closest('.modal__form-password').find('input').attr('type', 'text') : $(this).closest('.modal__form-password').find('input').attr('type', 'password');
+    });
+}
 
+// to default after close modal
+function resetForm() {
+    $('.modal__forget').hide();
+    // $('.modal__newpassword-create').show();
+    // $('.modal__newpassword-success').hide();
+    $('.modal__forget-wrap').show();
+    $('.modal__forget-mail').hide();
+    $('.modal__reg-success').hide();
+    $('.modal__reg').hide();
+    $('.modal__enter').show();
+}
+
+// change content in modal window
+function changeContent(btn, content) {
+    btn.click(function () {
+        $(this).closest('.modal__content').hide();
+        content.show();
+    });
+}
+
+
+// open modal with click
+function toogleModal(btn, modal) {
+    btn.click(function () {
+        modal.show();
+        $('body').css('overflow', 'hidden');
+        return false;
+    });
+    $('.modal__close').click(function () {
+        $(this).closest(modal).hide();
+        resetForm();
+        $('body').css('overflow', 'visible');
+        return false;
+    });
+    $('.modal__quiz-return').click(function () {
+        $(this).closest(modal).hide();
+        $('body').css('overflow', 'visible');
+        return false;
+    });
+
+    $(document).keydown(function (e) {
+        if (e.keyCode === 27) {
+            e.stopPropagation();
+            modal.hide();
+            resetForm();
+            $('body').css('overflow', 'visible');
+        }
+    });
+    modal.click(function (e) {
+        if ($(e.target).closest('.modal__content').length == 0) {
+            $(this).hide();
+            resetForm();
+            $('body').css('overflow', 'visible');
+        }
+    });
+}
 
 
 function toogleModalWithoutClick(modal, func) {
@@ -332,14 +395,6 @@ function tabsPosts() {
         $(".posts__tab .tab").removeClass("active").eq($(this).index()).addClass("active");
         $(".posts__tab-item").hide().eq($(this).index()).fadeIn();
         if (window.innerWidth <= 666) {
-            // $('.posts__slider').each(function() {
-            //     new Swiper(this, {
-            //         slidesPerView: 1.3,
-            //         spaceBetween: 10,
-            //         centeredSlides: true,
-            //         loop: true,
-            //     });
-            // });
             initSlider()
         }
 
@@ -350,7 +405,6 @@ function tabsPosts() {
 function changeFilter(){
     $('.select2-selection__rendered').each(function (){
         let placeholder = $(this).closest('.filter__item').find('.filter__header').text()
-
         $(this).text(placeholder)
     })
 }
@@ -373,14 +427,26 @@ function filterActiveOne(){
 };
 
 function calendar(){
-    $(".filter__datepicker").datepicker();
+    $(".filter__datepicker").datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
 }
 
 function dropDown(){
     if (window.innerWidth > 666) {
-        $(document).on('click', '.filter__sort', function () {
+        $(document).on('click', '.filter__dropdown', function () {
             $(this).find('.filter__inner').toggle()
         })
+        $(document).on('click', function(e) {
+            let targetElement = $('.filter__dropdown');
+            let clickedElement = $(e.target);
+
+            if (!clickedElement.is(targetElement) && !targetElement.has(clickedElement).length) {
+                console.log('ltcm')
+                $('.filter__inner').hide()
+            }
+        })
+
     }
     $('.filter__inner-item').each(function () {
         $(this).click(function () {
@@ -388,19 +454,14 @@ function dropDown(){
             $(this).prevAll('.filter__inner-item').removeClass('active');
             $(this).nextAll('.filter__inner-item').removeClass('active');
             let current = $(this).text()
-            $(this).closest('.filter__item ').find('input').val(current)
+            $(this).closest('.filter__item').find('input').val(current)
+
             if (window.innerWidth > 666) {
                 $(this).closest('.filter__item ').find('.filter__header').text(current)
             }
+            sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
         });
     })
-    // if (window.innerWidth < 666) {
-    //     $('.filter__inner-item').click(function () {
-    //         $(this).addClass('active');
-    //         $(this).prevAll('.filter__inner-item').removeClass('active');
-    //         $(this).nextAll('.filter__inner-item').removeClass('active');
-    //     })
-    // }
 }
 
 function filterMob(){
@@ -413,6 +474,106 @@ function filterMob(){
     })
 
 }
+
+
+function showTickets(){
+    let filterForm = $('.filter__form')
+    filterForm.on("submit", function (e) {
+        e.preventDefault();
+        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
+            $('.filter__mob-wrap').removeClass('active')
+        }
+        $('.filter__mob-wrap').removeClass('active')
+    });
+    filterForm.on("reset", function (e) {
+        e.preventDefault();
+        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
+            $('.filter__mob-wrap').removeClass('active')
+        }
+        $('.filter__mob-wrap').removeClass('active')
+    });
+
+    $(document).on('change','.filter__datepicker',function (){
+        sendForm(filterForm, '/wp-admin/admin-ajax.php')
+    })
+    $(document).on('change','.filter__select',function (){
+        sendForm(filterForm, '/wp-admin/admin-ajax.php')
+    })
+    $(document).on('change','.filter__sort .filter__header',function (){
+        sendForm(filterForm, '/wp-admin/admin-ajax.php')
+    })
+}
+
+
+
+
+// const ajaxGetProduct =(obj)=>{
+//     $.ajax({
+//         type: 'POST',
+//         url: '/wp-admin/admin-ajax.php',
+//         data: obj,
+//         success: function (res) {
+//             // $('.shop__main .shop__load').remove();
+//             // $('.shop__main .shop__list').append(res);
+//
+//         },
+//     });
+//
+// }
+//
+// let page = 1;
+// const loadMore = () =>{
+//     $(document).on('click', '.upcoming__load', function () {
+//         page++;
+//         // let formdata = $('.filter__form').serializeArray();
+//         const categories = $('.tickets__categories.active')
+//         const data = {};
+//         console.log(data,12345)
+//         // $(formdata).each(function(index, obj){
+//         //     data[obj.name] = obj.value;
+//         // });
+//         delete data.action;
+//         const obj = { ...data, page, categories, action:'loadmore'}
+//         ajaxGetProduct(obj);
+//     })
+// }
+
+
+
+
+function enterError(error){
+    if(error.responseJSON.data === "user_empty" ){
+        $('.modal__form').prepend('<div class="error-mail">User with this email does not exits</div>')
+    }
+    if(error.responseJSON.data === "incorrect_password" ){
+        $('.modal__form').prepend('<div class="error-mail">Passwo</div>')
+    }
+    if(error.responseJSON.data === "user_exists" ){
+        $('.modal__form').prepend('<div class="error-mail">User with this email exists</div>')
+    }
+
+    setTimeout(function () {
+        $('.error-mail').hide()
+    }, 4000);
+
+}
+
+function registerSuccess (res){
+    $('.header__user').attr('href', `${res.data.redirect_url}`);
+    $('.header__user').removeClass('header__auth').unbind();
+    $('.modal__enter-wrap').hide();
+    toogleModalWithoutClick($('.modal__reg-success'))
+}
+
+function enterSuccess(){
+    $('.modal__auth').hide();
+}
+
+
+
+
+
+
 
 $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
@@ -433,6 +594,13 @@ $(document).ready(function(){
     calendar()
     dropDown()
     goBack()
+    showTickets()
+    showPassword()
+    changeContent($('.modal__enter-reg'), $('.modal__reg'));
+    changeContent($('.modal__reg-enter'), $('.modal__enter'));
+    changeContent($('.modal__enter-forget'), $('.modal__forget'));
+    toogleModal($('.header__user'), $('.modal__auth'));
+    // loadMore()
 
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');
@@ -442,6 +610,8 @@ $(document).ready(function(){
         toogleModalWithoutClick(subsModal)
     });
 
+
+
     let searchForm = $('.header__search-form')
     validateForm(searchForm, function () {
         sendForm(searchForm, '/wp-admin/admin-ajax.php'), function (){
@@ -449,6 +619,26 @@ $(document).ready(function(){
         }
     });
 
+
+
+    let formEnter = $('.modal__form-enter');
+    validateForm(formEnter, function () {
+        sendForm(formEnter, '/wp-admin/admin-ajax.php', enterSuccess, enterError);
+    });
+
+    // register form
+    let formRegister = $('.modal__form-reg');
+    validateForm(formRegister, function () {
+        sendForm(formRegister, '/wp-admin/admin-ajax.php', registerSuccess, enterError);
+    })
+
+    // forgot password form
+    let formForgot = $('.modal__form-forget');
+    validateForm(formForgot, function () {
+        sendForm(formForgot, '/wp-admin/admin-ajax.php');
+        $('.modal__forget-wrap').hide();
+        $('.modal__forget-mail').show();
+    });
 });
 
 $(window).load(function(){
