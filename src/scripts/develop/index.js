@@ -166,10 +166,10 @@ const validateForm = (form, func) => {
         return this.optional(element) || /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,62}$/i.test(value);
     }, "Please enter correct email");
 
-    // $.validator.addMethod("goodPhone", function (value, element) {
-    //     // return this.optional(element) || /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/i.test(value);
-    //     return this.optional(element) || /^[+]*[0-9]{10,14}$/g.test(value);
-    // }, "Введіть номер у форматі +380 xxx xx xx");
+    $.validator.addMethod("goodPhone", function (value, element) {
+        // return this.optional(element) || /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/i.test(value);
+        return this.optional(element) || /^[+]*[0-9]{15,20}$/g.test(value);
+    }, "Please enter correct phone number");
 
     form.validate({
         rules: {
@@ -183,11 +183,11 @@ const validateForm = (form, func) => {
                 required: true,
                 goodName: true
             },
-            // phone: {
-            //     required: true,
-            //     goodPhone: true
-            //
-            // },
+            phone: {
+                required: true,
+                goodPhone: true
+
+            },
             email: {
                 required: true,
                 goodEmail: true,
@@ -223,10 +223,10 @@ const validateForm = (form, func) => {
                 minlength: "Last name can't be shorter than 2 characters",
                 maxLength: "Last name can't be longer than 25 characters "
             },
-            // phone: {
-            //     required: "Це поле є обов’язкове",
-            //     phone: "Введіть номер у форматі +380 xxx xx xx"
-            // },
+            phone: {
+                required: "This field is required",
+                phone: "Please enter correct phone number"
+            },
             email: {
                 required: "This field is required",
                 email: "Please enter correct email"
@@ -390,14 +390,13 @@ function toogleModalWithoutClick(modal, func) {
 }
 
 
-function tabsPosts() {
-    $(".posts__tab .tab").click(function () {
-        $(".posts__tab .tab").removeClass("active").eq($(this).index()).addClass("active");
-        $(".posts__tab-item").hide().eq($(this).index()).fadeIn();
+function tabs() {
+    $(".tabs .tab").click(function () {
+        $(".tabs .tab").removeClass("active").eq($(this).index()).addClass("active");
+        $(".tab__item").hide().eq($(this).index()).fadeIn();
         if (window.innerWidth <= 666) {
             initSlider()
         }
-
     }).eq(0).addClass("active");
 
 }
@@ -440,13 +439,10 @@ function dropDown(){
         $(document).on('click', function(e) {
             let targetElement = $('.filter__dropdown');
             let clickedElement = $(e.target);
-
             if (!clickedElement.is(targetElement) && !targetElement.has(clickedElement).length) {
-                console.log('ltcm')
                 $('.filter__inner').hide()
             }
         })
-
     }
     $('.filter__inner-item').each(function () {
         $(this).click(function () {
@@ -456,10 +452,12 @@ function dropDown(){
             let current = $(this).text()
             $(this).closest('.filter__item').find('input').val(current)
 
+            $('.modal__dropdown .filter__header').css('color','#212121')
             if (window.innerWidth > 666) {
                 $(this).closest('.filter__item ').find('.filter__header').text(current)
             }
-            sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
+            // sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
+
         });
     })
 }
@@ -472,26 +470,12 @@ function filterMob(){
     $(document).on('click','.filter__mob-close', function (){
         $('.filter__mob-wrap').removeClass('active')
     })
-
 }
 
 
 function showTickets(){
     let filterForm = $('.filter__form')
-    filterForm.on("submit", function (e) {
-        e.preventDefault();
-        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
-            $('.filter__mob-wrap').removeClass('active')
-        }
-        $('.filter__mob-wrap').removeClass('active')
-    });
-    filterForm.on("reset", function (e) {
-        e.preventDefault();
-        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
-            $('.filter__mob-wrap').removeClass('active')
-        }
-        $('.filter__mob-wrap').removeClass('active')
-    });
+
 
     $(document).on('change','.filter__datepicker',function (){
         sendForm(filterForm, '/wp-admin/admin-ajax.php')
@@ -502,6 +486,34 @@ function showTickets(){
     $(document).on('change','.filter__sort .filter__header',function (){
         sendForm(filterForm, '/wp-admin/admin-ajax.php')
     })
+    filterForm.on("submit", function (e) {
+        e.preventDefault();
+        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
+            $('.filter__mob-wrap').removeClass('active')
+        }
+        $('.filter__mob-wrap').removeClass('active')
+    });
+    filterForm.on("reset", function (e) {
+        e.preventDefault();
+        $('.filter__sort-input').val('')
+        $('.filter__datepicker').val('')
+        $('.filter__datepicker').attr('placeholder','Date')
+        $('.select2-selection__rendered').attr('placeholder','Date')
+        // $('.filter__select option').each(function (){
+        //     $(this).attr('selected','false')
+        // })
+        $('.filter__select option:first-child').attr('selected','true')
+        changeFilter()
+
+        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
+            $('.filter__mob-wrap').removeClass('active')
+        }
+        $('.filter__inner-item').removeClass('active')
+        console.log('before',$('.filter__sort-input').val())
+
+        console.log('after',$('.filter__sort-input').val())
+        $('.filter__mob-wrap').removeClass('active')
+    });
 }
 
 
@@ -570,18 +582,53 @@ function enterSuccess(){
 }
 
 
+function changeColorDropdown(){
+    $('.modal__dropdown .filter__header').addClass('modal__dropdown-header')
+}
 
 
+function changeProfileInfo() {
+    let arrProfile = [];
+
+    $('.profile__info-edit').click(function () {
+        $(this).hide();
+        $(this).closest('.profile__info-input').find('input').prop('disabled', false).focus()
+        $(this).next('.profile__info-btn').css('display','flex')
+        // $('.info__form input').each(function () {
+        //     arrProfile.push($(this).val());
+        //     $(this).prop('disabled', false);
+        // });
+        // $('.info__form input[type^="password"]').prop('disabled', true);
+        //
+        // $('.info__form-button').css('display', 'flex');
+    });
+
+    $('.profile__info-cancel').click(function () {
+        $(this).closest('.profile__info-input').find('input').prop('disabled', true)
+        $(this).closest('.profile__info-input').find('.profile__info-edit').show();
+        $(this).closest('.profile__info-btn').hide()
+        // $('.info__form input').each(function (i) {
+        //     $(this).prop('disabled', true);
+        //     $(this).val(arrProfile[i]);
+        // });
+    });
+    $('.profile__info-change').click(function () {
+        $(this).closest('.profile__info-input').find('input').prop('disabled', true)
+        $(this).closest('.profile__info-input').find('.profile__info-edit').show();
+        $(this).closest('.profile__info-btn').hide()
+        $(this).closest('.profile__info-input').find('input').val()
+    })
+}
 
 
 
 $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
     changeToMob()
-    tabsPosts()
+    tabs()
     filterMob()
     $('.filter__select').select2({
-
+        placeholder: "Please select a country"
     }).on('select2:opening', function(e) {
         $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', 'Search')
     })
@@ -596,6 +643,8 @@ $(document).ready(function(){
     goBack()
     showTickets()
     showPassword()
+    changeColorDropdown()
+    changeProfileInfo()
     changeContent($('.modal__enter-reg'), $('.modal__reg'));
     changeContent($('.modal__reg-enter'), $('.modal__enter'));
     changeContent($('.modal__enter-forget'), $('.modal__forget'));
@@ -610,6 +659,13 @@ $(document).ready(function(){
         toogleModalWithoutClick(subsModal)
     });
 
+
+
+    // let profileForm = $('.profile__info')
+    // validateForm(profileForm, function () {
+    //     sendForm(profileForm, '/wp-admin/admin-ajax.php'), function (){
+    //     }
+    // });
 
 
     let searchForm = $('.header__search-form')
@@ -630,6 +686,9 @@ $(document).ready(function(){
     let formRegister = $('.modal__form-reg');
     validateForm(formRegister, function () {
         sendForm(formRegister, '/wp-admin/admin-ajax.php', registerSuccess, enterError);
+
+    $('.modal__enter-wrap').hide();
+    toogleModalWithoutClick($('.modal__reg-success'))
     })
 
     // forgot password form
