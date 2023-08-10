@@ -27,10 +27,12 @@
                     </div>
                     <form action="" class="modal__form modal__form-enter ">
                         <div class="modal__form-content">
-                            <input name="email" type="email" placeholder="Email"/>
+                            <input name="email" id="email" type="email"/>
+                            <label class="label" for="email">Email</label>
                         </div>
                         <div class="modal__form-content modal__form-password">
-                            <input name="password" type="password" placeholder="Password"/>
+                            <input name="password" id="passwordEnter" type="password"/>
+                            <label class="label" for="passwordEnter">Password</label>
                             <div class="modal__form-eye"></div>
                         </div>
                         <div class="modal__flex">
@@ -58,16 +60,20 @@
                     </div>
                     <form action="" class="modal__form modal__form-reg">
                         <div class="modal__form-content">
-                            <input name="name" type="text" placeholder="First name" />
+                            <input name="name" id="firstname" type="text"/>
+                            <label class="label" for="firstname">First name</label>
                         </div>
                         <div class="modal__form-content">
-                            <input name="lastname" type="text" placeholder="Last name"/>
+                            <input name="lastname" id="lastname" type="text"/>
+                            <label class="label" for="lastname">Last name</label>
                         </div>
                         <div class="modal__form-content">
-                            <input name="email" type="email" placeholder="Email" />
+                            <input name="email" type="email" id="emailReg"/>
+                            <label class="label" for="emailReg">Email</label>
                         </div>
                         <div class="modal__form-content modal__form-password">
-                            <input name="password" type="password" id="password" placeholder="Create account password" />
+                            <input name="password" type="password" id="passwordReg"/>
+                            <label class="label" for="passwordReg">Create account password</label>
                             <div class="modal__form-eye"></div>
                         </div>
                         <div class="modal__title modal__title-role">
@@ -111,7 +117,8 @@
                     </div>
                     <form action="" class="modal__form modal__form-forget">
                         <div class="modal__form-content">
-                           <input name="email" type="email" placeholder="Your email" />
+                           <input name="email" type="email" id="passwordForgot"/>
+                            <label class="label" for="passwordForgot">Your email</label>
                         </div>
                         <button type="submit" class="section__btn">Change password</button>
                     </form>
@@ -124,6 +131,21 @@
                         <h2>We send a message to your email</h2>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal__password" >
+        <div class="modal__wrap">
+            <div class="modal__content ">
+                <div class="modal__close img">
+                    <img src="../img/close.svg" alt="">
+                </div>
+                <div class="modal__title">
+                    <h2 >Password changed successfully</h2>
+                </div>
+                <button class="modal__ok section__btn" >
+                    Okay
+                </button>
             </div>
         </div>
     </div>

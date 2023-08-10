@@ -7,6 +7,7 @@ const openMenu = () => {
 
 function changeToMob() {
     if (window.innerWidth <= 666) {
+        $('.article__back button').text('')
         $('.header__menu .header__logo').closest('li').remove()
         $('.music__more').text('Go to the all posts')
         initSlider()
@@ -64,7 +65,6 @@ function goBack(){
         }
         history.back()
     })
-
 }
 
 function removeNews(){
@@ -153,6 +153,17 @@ function initSlider () {
 //
 //
 // };
+
+
+
+function showLabel(){
+    $('.modal__form-content input').each(function (){
+        $(this).click(function (){
+            $(this).closest('.modal__form-content').find('.label').addClass('active')
+        })
+    })
+}
+
 const validateForm = (form, func) => {
     form.on("submit", function (e) {
         e.preventDefault();
@@ -197,20 +208,15 @@ const validateForm = (form, func) => {
                 required: true,
                 minlength: 8
             },
-            // password_confirm: {
-            //     required: true,
-            //     minlength: 8,
-            //     equalTo: "#password"
-            // },
-            // passwordNew: {
-            //     required: true,
-            //     minlength: 8
-            // },
-            // passwordNew_confirm: {
-            //     required: true,
-            //     minlength: 8,
-            //     equalTo: "#passwordNew"
-            // }
+            passwordNew: {
+                required: true,
+                minlength: 8,
+            },
+            passwordNewRepeat: {
+                required: true,
+                minlength: 8,
+                equalTo: "#passwordNew"
+            }
         },
         messages: {
             name: {
@@ -235,19 +241,14 @@ const validateForm = (form, func) => {
                 required: "This field is required",
                 minlength: "Last name can't be shorter than 8 characters",
             },
-            // password_confirm: {
-            //     required: "Це поле є обов’язкове",
-            //     equalTo: "Паролі не співпадають",
-            //     minlength: "Пароль не може бути коротше за 8 символів"
-            // },
-            // passwordNew: {
-            //     required: "Це поле є обов’язкове",
-            //     minlength: "Пароль не може бути коротше за 8 символів"
-            // },
-            // passwordNew_confirm: {
-            //     required: "Це поле є обов’язкове",
-            //     equalTo: "Паролі не співпадають"
-            // }
+            passwordNew: {
+                required: "This field is required",
+                minlength: "Last name can't be shorter than 8 characters",
+            },
+            passwordNewRepeat: {
+                required: "This field is required",
+                equalTo: "Passwords do not match"
+            }
 
         },
         submitHandler: function () {
@@ -338,6 +339,12 @@ function toogleModal(btn, modal) {
         $('body').css('overflow', 'visible');
         return false;
     });
+    $('.modal__ok').click(function () {
+        $(this).closest(modal).hide();
+        $('body').css('overflow', 'visible');
+        func();
+        return false;
+    });
     $('.modal__quiz-return').click(function () {
         $(this).closest(modal).hide();
         $('body').css('overflow', 'visible');
@@ -372,6 +379,11 @@ function toogleModalWithoutClick(modal, func) {
         func();
         return false;
     });
+    $('.modal__ok').click(function () {
+        $(this).closest(modal).hide();
+        $('body').css('overflow', 'visible');
+        console.log(123)
+    });
     $(document).keydown(function (e) {
         if (e.keyCode === 27) {
             e.stopPropagation();
@@ -390,10 +402,10 @@ function toogleModalWithoutClick(modal, func) {
 }
 
 
-function tabs() {
-    $(".tabs .tab").click(function () {
-        $(".tabs .tab").removeClass("active").eq($(this).index()).addClass("active");
-        $(".tab__item").hide().eq($(this).index()).fadeIn();
+function tabs(tab, tabItem) {
+    tab.click(function () {
+        tab.removeClass("active").eq($(this).index()).addClass("active");
+        tabItem.hide().eq($(this).index()).fadeIn();
         if (window.innerWidth <= 666) {
             initSlider()
         }
@@ -625,7 +637,8 @@ function changeProfileInfo() {
 $(document).ready(function(){
     $('.header__burger').on('click', openMenu);
     changeToMob()
-    tabs()
+    tabs($('.tab'), $('.tab__item'));
+    tabs($('.tab__order'), $('.tab__item-order'));
     filterMob()
     $('.filter__select').select2({
         placeholder: "Please select a country"
@@ -645,6 +658,7 @@ $(document).ready(function(){
     showPassword()
     changeColorDropdown()
     changeProfileInfo()
+    showLabel()
     changeContent($('.modal__enter-reg'), $('.modal__reg'));
     changeContent($('.modal__reg-enter'), $('.modal__enter'));
     changeContent($('.modal__enter-forget'), $('.modal__forget'));
@@ -675,6 +689,11 @@ $(document).ready(function(){
         }
     });
 
+    let passwordForm = $('.password__form');
+    validateForm(passwordForm, function () {
+        sendForm(passwordForm, '/wp-admin/admin-ajax.php');
+        toogleModalWithoutClick($('.modal__password'))
+    });
 
 
     let formEnter = $('.modal__form-enter');

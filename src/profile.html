@@ -1,12 +1,13 @@
 //= partials/head.html
 
 <div class="wrap">
+
     //= partials/header.html
 
     <main class="wrap__main" >
         <section class="breadcrumbs__wrap">
             <div class="container">
-                <div class="breadcrumbs breadcrumbs__relative">
+                <div class="breadcrumbs breadcrumbs__relative breadcrumbs__black">
                     <a href="#">Home</a>
                     <a href="#">Profile</a>
                 </div>
@@ -73,34 +74,197 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="profile__info-password">Change password</button>
+                                <a href="change-password.html" class="profile__info-password">Change password</a>
                                 <button class="profile__info-logout">Sign out of the account</button>
                             </form>
 
                         </div>
-                        <div class="tab__item">
-                            <div class="tabs">
-                                <div class="profile__header">
-                                    <span class="tab active">Tickets</span>
-                                    <span class="tab">Merch & Fashion</span>
+                        <div class="tab__item order">
+
+<!--                            Якщо корзина пуста то ось це закоментоване-->
+<!--                            <div class="order__empty">-->
+<!--                                <div class="order__empty-img img">-->
+<!--                                    <img src="img/wallet.svg" alt="">-->
+<!--                                </div>-->
+<!--                                <div class="order__empty-title">-->
+<!--                                    <h3>There have been no orders yet</h3>-->
+<!--                                </div>-->
+<!--                                <div class="order__empty-subtitle">-->
+<!--                                    <h4>Looks like you haven't added anything to your cart yet</h4>-->
+<!--                                </div>-->
+<!--                                <a href="shop.html" class="section__btn order__empty-link">Shop Now</a>-->
+<!--                            </div>-->
+
+                            <div class="profile__header-order profile__header ">
+                                <span class="tab__order active">Tickets</span>
+                                <span class="tab__order">Merch & Fashion</span>
+                            </div>
+                            <div class="tab__content">
+                                <div class="tab__item-order">
+                                    <ul class="order__list">
+                                        <li class="order__item">
+                                            <a href="">
+                                                <div class="order__info-block">
+                                                    <div class="order__img img">
+                                                        <img src="img/post1.png" alt="">
+                                                    </div>
+                                                    <div class="order__info">
+                                                        <h3 class="order__date">Thursday, 22 December, 2024, 19:00</h3>
+                                                        <h3 class="order__place">Jazz Cafe</h3>
+                                                        <h3 class="order__name">Fiddler’s Elbow Evening Gig </h3>
+                                                        <h3 class="order__count">2</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="order__info-block">
+                                                    <div class="order__status">
+                                                        <p>Order completed</p>
+                                                        <h4>№1232456</h4>
+                                                    </div>
+                                                    <div class="order__status">
+                                                        <p>Date: 22/03/2023</p>
+                                                        <p>To pay: $60</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="order__item">
+                                            <a href="">
+                                                <div class="order__info-block">
+                                                    <div class="order__img img">
+                                                        <img src="img/post1.png" alt="">
+                                                    </div>
+                                                    <div class="order__info">
+                                                        <h3 class="order__date">Thursday, 22 December, 2024, 19:00</h3>
+                                                        <h3 class="order__place">Jazz Cafe</h3>
+                                                        <h3 class="order__name">Fiddler’s Elbow Evening Gig </h3>
+                                                        <h3 class="order__count">2</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="order__info-block">
+                                                    <div class="order__status">
+                                                        <p>Order completed</p>
+                                                        <h4>№1232456</h4>
+                                                    </div>
+                                                    <div class="order__status">
+                                                        <p>Date: 22/03/2023</p>
+                                                        <p>To pay: $60</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="order__item">
+                                            <a href="">
+                                                <div class="order__info-block">
+                                                    <div class="order__img img">
+                                                        <img src="img/post1.png" alt="">
+                                                    </div>
+                                                    <div class="order__info">
+                                                        <h3 class="order__date">Thursday, 22 December, 2024, 19:00</h3>
+                                                        <h3 class="order__place">Jazz Cafe</h3>
+                                                        <h3 class="order__name">Fiddler’s Elbow Evening Gig </h3>
+                                                        <h3 class="order__count">2</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="order__info-block">
+                                                    <div class="order__status">
+                                                        <p>Order completed</p>
+                                                        <h4>№1232456</h4>
+                                                    </div>
+                                                    <div class="order__status">
+                                                        <p>Date: 22/03/2023</p>
+                                                        <p>To pay: $60</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="tab__content">
-                                    <div class="tab__item">
-                                        123
-                                    </div>
-                                    <div class="tab__item">
-                                        <h2>123456</h2>
-                                    </div>
+                                <div class="tab__item-order">
+                                    <ul class="order__list">
+                                        <li class="order__item">
+                                            <a href="">
+                                                <div class="order__info-block">
+                                                    <div class="order__img img">
+                                                        <img src="img/post2.png" alt="">
+                                                    </div>
+                                                    <div class="order__info">
+                                                        <h3 class="order__place">Jazz Cafe</h3>
+                                                        <h3 class="order__name">Fiddler’s Elbow Evening Gig </h3>
+                                                        <h3 class="order__count">2</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="order__info-block">
+                                                    <div class="order__status">
+                                                        <p>Order completed</p>
+                                                        <h4>№1232456</h4>
+                                                    </div>
+                                                    <div class="order__status">
+                                                        <p>Date: 22/03/2023</p>
+                                                        <p>To pay: $60</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="order__item">
+                                            <a href="">
+                                                <div class="order__info-block">
+                                                    <div class="order__img img">
+                                                        <img src="img/post2.png" alt="">
+                                                    </div>
+                                                    <div class="order__info">
+                                                        <h3 class="order__place">Jazz Cafe</h3>
+                                                        <h3 class="order__name">Fiddler’s Elbow Evening Gig </h3>
+                                                        <h3 class="order__count">2</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="order__info-block">
+                                                    <div class="order__status">
+                                                        <p>Order completed</p>
+                                                        <h4>№1232456</h4>
+                                                    </div>
+                                                    <div class="order__status">
+                                                        <p>Date: 22/03/2023</p>
+                                                        <p>To pay: $60</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="order__item">
+                                            <a href="">
+                                                <div class="order__info-block">
+                                                    <div class="order__img img">
+                                                        <img src="img/post2.png" alt="">
+                                                    </div>
+                                                    <div class="order__info">
+                                                        <h3 class="order__place">Jazz Cafe</h3>
+                                                        <h3 class="order__name">Fiddler’s Elbow Evening Gig </h3>
+                                                        <h3 class="order__count">2</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="order__info-block">
+                                                    <div class="order__status">
+                                                        <p>Order completed</p>
+                                                        <h4>№1232456</h4>
+                                                    </div>
+                                                    <div class="order__status">
+                                                        <p>Date: 22/03/2023</p>
+                                                        <p>To pay: $60</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
+    //= partials/footer.html
 </div>
 
 //= partials/scripts.html
