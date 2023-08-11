@@ -6,11 +6,13 @@
                 <div class="modal__close img">
                     <img src="../img/close.svg" alt="">
                 </div>
-                <div class="modal__title">
-                    <h2 >Thank you for subscribing</h2>
-                </div>
-                <div class="modal__subtitle">
-                    <h3>We promise to send you only the most useful news. Now you will always be aware of all promotional offers!</h3>
+                <div class="modal__overflow">
+                    <div class="modal__title">
+                        <h2 >Thank you for subscribing</h2>
+                    </div>
+                    <div class="modal__subtitle">
+                        <h3>We promise to send you only the most useful news. Now you will always be aware of all promotional offers!</h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -22,115 +24,123 @@
                     <div class="modal__close img">
                         <img src="../img/close.svg" alt="">
                     </div>
-                    <div class="modal__title">
-                        <h2>Sign In</h2>
-                    </div>
-                    <form action="" class="modal__form modal__form-enter ">
-                        <div class="modal__form-content">
-                            <input name="email" id="email" type="email"/>
-                            <label class="label" for="email">Email</label>
+                    <div class="modal__overflow">
+                        <div class="modal__title">
+                            <h2>Sign In</h2>
                         </div>
-                        <div class="modal__form-content modal__form-password">
-                            <input name="password" id="passwordEnter" type="password"/>
-                            <label class="label" for="passwordEnter">Password</label>
-                            <div class="modal__form-eye"></div>
-                        </div>
-                        <div class="modal__flex">
-                            <div class="modal__form-content modal__checkbox">
-                                <div class="form-group">
-                                    <input type="checkbox" id="remember" checked name="remember">
-                                    <label for="remember">Remember me</label>
-                                </div>
+                        <form action="" class="modal__form modal__form-enter ">
+                            <div class="modal__form-content">
+                                <input name="email" id="email" type="email"/>
+                                <label class="label" for="email">Email</label>
                             </div>
-                            <div class="modal__text"><span class="modal__enter-forget">Forgot password?</span></div>
-                        </div>
+                            <div class="modal__form-content modal__form-password">
+                                <input name="password" id="passwordEnter" type="password"/>
+                                <label class="label" for="passwordEnter">Password</label>
+                                <div class="modal__form-eye"></div>
+                            </div>
+                            <div class="modal__flex">
+                                <div class="modal__form-content modal__checkbox">
+                                    <div class="form-group">
+                                        <input type="checkbox" id="remember" checked name="remember">
+                                        <label for="remember">Remember me</label>
+                                    </div>
+                                </div>
+                                <div class="modal__text"><span class="modal__enter-forget">Forgot password?</span></div>
+                            </div>
 
-                        <button type="submit" class="section__btn">Login</button>
-                    </form>
-                    <div class="modal__text modal__text-bottom">Don’t have an account? <span class="modal__enter-reg ">Create now</span> </div>
+                            <button type="submit" class="section__btn">Login</button>
+                        </form>
+                        <div class="modal__text modal__text-bottom">Don’t have an account? <span class="modal__enter-reg ">Create now</span> </div>
+                    </div>
             </div>
+
             <!-- modal sign up-->
             <div class="modal__content modal__reg">
-                <div class="modal__enter-wrap">
                     <div class="modal__close img">
                         <img src="../img/close.svg" alt="">
                     </div>
-                    <div class="modal__title">
-                        <h2>Sign Up</h2>
-                    </div>
-                    <form action="" class="modal__form modal__form-reg">
-                        <div class="modal__form-content">
-                            <input name="name" id="firstname" type="text"/>
-                            <label class="label" for="firstname">First name</label>
+                    <div class="modal__overflow">
+                        <div class="modal__title">
+                            <h2>Sign Up</h2>
                         </div>
-                        <div class="modal__form-content">
-                            <input name="lastname" id="lastname" type="text"/>
-                            <label class="label" for="lastname">Last name</label>
-                        </div>
-                        <div class="modal__form-content">
-                            <input name="email" type="email" id="emailReg"/>
-                            <label class="label" for="emailReg">Email</label>
-                        </div>
-                        <div class="modal__form-content modal__form-password">
-                            <input name="password" type="password" id="passwordReg"/>
-                            <label class="label" for="passwordReg">Create account password</label>
-                            <div class="modal__form-eye"></div>
-                        </div>
-                        <div class="modal__title modal__title-role">
-                            <h2>Select your role</h2>
-                        </div>
-                        <div class="modal__form-content">
-                            <div class="filter__item modal__dropdown filter__dropdown">
-                                <div class="filter__header">Select here</div>
-                                <input type="text" class="filter__sort-input" name="role" hidden>
-                                <div class="filter__inner">
-                                    <div class="filter__inner-item">admin1</div>
-                                    <div class="filter__inner-item">admin2</div>
-                                    <div class="filter__inner-item">admin3</div>
+                        <form action="" class="modal__form modal__form-reg">
+                            <div class="modal__form-content">
+                                <input name="name" id="firstname" type="text"/>
+                                <label class="label" for="firstname">First name</label>
+                            </div>
+                            <div class="modal__form-content">
+                                <input name="lastname" id="lastname" type="text"/>
+                                <label class="label" for="lastname">Last name</label>
+                            </div>
+                            <div class="modal__form-content">
+                                <input name="email" type="email" id="emailReg"/>
+                                <label class="label" for="emailReg">Email</label>
+                            </div>
+                            <div class="modal__form-content modal__form-password">
+                                <input name="password" type="password" id="passwordReg"/>
+                                <label class="label" for="passwordReg">Create account password</label>
+                                <div class="modal__form-eye"></div>
+                            </div>
+                            <div class="modal__title modal__title-role">
+                                <h2>Select your role</h2>
+                            </div>
+                            <div class="modal__form-content">
+                                <div class="filter__item modal__dropdown filter__dropdown">
+                                    <div class="filter__header">Select here</div>
+                                    <input type="text" class="filter__sort-input" name="role" hidden>
+                                    <div class="filter__inner">
+                                        <div class="filter__inner-item">admin1</div>
+                                        <div class="filter__inner-item">admin2</div>
+                                        <div class="filter__inner-item">admin3</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal__reg-btn" >
-                            <button type="submit" class="section__btn">Create my account</button>
-                            <div class="modal__text modal__text-bottom" >Already have an account? <span class="modal__reg-enter" >Sign in</span></div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal__reg-success">
-                    <div class="modal__close img">
-                        <img src="../img/close.svg" alt="">
+                            <div class="modal__reg-btn" >
+                                <button type="submit" class="section__btn">Create my account</button>
+                                <div class="modal__text modal__text-bottom" >Already have an account? <span class="modal__reg-enter" >Sign in</span></div>
+                            </div>
+                        </form>
                     </div>
+            </div>
+            <div class="modal__content modal__reg-success">
+                <div class="modal__close img">
+                    <img src="../img/close.svg" alt="">
+                </div>
+                <div class="modal__overflow">
                     <div class="modal__title">
                         <h2>Thank you for registration</h2>
                     </div>
                 </div>
-
             </div>
             <!-- modal forgot password-->
             <div class="modal__content modal__forget">
-                <div class="modal__forget-wrap">
-                    <div class="modal__close img">
+                <div class="modal__close img">
                         <img src="../img/close.svg" alt="">
                     </div>
-                    <div class="modal__title">
-                        <h2>Forgot your password?</h2>
-                    </div>
-                    <form action="" class="modal__form modal__form-forget">
-                        <div class="modal__form-content">
-                           <input name="email" type="email" id="passwordForgot"/>
-                            <label class="label" for="passwordForgot">Your email</label>
+                <div class="modal__overflow">
+                        <div class="modal__title">
+                            <h2>Forgot your password?</h2>
                         </div>
-                        <button type="submit" class="section__btn">Change password</button>
-                    </form>
-                </div>
-                <div class="modal__auth-title modal__forget-mail ">
+                        <form action="" class="modal__form modal__form-forget">
+                            <div class="modal__form-content">
+                               <input name="email" type="email" id="passwordForgot"/>
+                                <label class="label" for="passwordForgot">Your email</label>
+                            </div>
+                            <button type="submit" class="section__btn">Change password</button>
+                        </form>
+                    </div>
+            </div>
+
+            <div class="modal__content modal__forget-mail ">
                     <div class="modal__close img">
-                        <img src="../img/close.svg" alt="">
+                           <img src="../img/close.svg" alt="">
                     </div>
-                    <div class="modal__title">
-                        <h2>We send a message to your email</h2>
+                    <div class="modal__overflow">
+                        <div class="modal__title">
+                            <h2>We send a message to your email</h2>
+                        </div>
                     </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -140,12 +150,14 @@
                 <div class="modal__close img">
                     <img src="../img/close.svg" alt="">
                 </div>
-                <div class="modal__title">
-                    <h2 >Password changed successfully</h2>
+                <div class="modal__overflow">
+                    <div class="modal__title">
+                        <h2 >Password changed successfully</h2>
+                    </div>
+                    <button class="modal__ok section__btn" >
+                        Okay
+                    </button>
                 </div>
-                <button class="modal__ok section__btn" >
-                    Okay
-                </button>
             </div>
         </div>
     </div>

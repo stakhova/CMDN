@@ -177,10 +177,10 @@ const validateForm = (form, func) => {
         return this.optional(element) || /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,62}$/i.test(value);
     }, "Please enter correct email");
 
-    $.validator.addMethod("goodPhone", function (value, element) {
-        // return this.optional(element) || /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/i.test(value);
-        return this.optional(element) || /^[+]*[0-9]{15,20}$/g.test(value);
-    }, "Please enter correct phone number");
+    // $.validator.addMethod("goodPhone", function (value, element) {
+    //     // return this.optional(element) || /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/i.test(value);
+    //     return this.optional(element) || /^[+]*[0-9]{15,20}$/g.test(value);
+    // }, "Please enter correct phone number");
 
     form.validate({
         rules: {
@@ -196,7 +196,7 @@ const validateForm = (form, func) => {
             },
             phone: {
                 required: true,
-                goodPhone: true
+                // goodPhone: true
 
             },
             email: {
@@ -342,7 +342,6 @@ function toogleModal(btn, modal) {
     $('.modal__ok').click(function () {
         $(this).closest(modal).hide();
         $('body').css('overflow', 'visible');
-        func();
         return false;
     });
     $('.modal__quiz-return').click(function () {
@@ -380,6 +379,7 @@ function toogleModalWithoutClick(modal, func) {
         return false;
     });
     $('.modal__ok').click(function () {
+        console.log(333,$(this).closest(modal))
         $(this).closest(modal).hide();
         $('body').css('overflow', 'visible');
         console.log(123)
@@ -443,19 +443,24 @@ function calendar(){
     });
 }
 
+function drop(drop, inner){
+    $(document).on('click', drop, function () {
+        $(this).find(inner).toggle()
+    })
+    $(document).on('click', function(e) {
+        let targetElement = drop;
+        let clickedElement = $(e.target);
+        if (!clickedElement.is(targetElement) && !targetElement.has(clickedElement).length) {
+            inner.hide()
+        }
+    })
+}
+
 function dropDown(){
     if (window.innerWidth > 666) {
-        $(document).on('click', '.filter__dropdown', function () {
-            $(this).find('.filter__inner').toggle()
-        })
-        $(document).on('click', function(e) {
-            let targetElement = $('.filter__dropdown');
-            let clickedElement = $(e.target);
-            if (!clickedElement.is(targetElement) && !targetElement.has(clickedElement).length) {
-                $('.filter__inner').hide()
-            }
-        })
+        drop($('.filter .filter__dropdown'), $('.filter .filter__inner'))
     }
+    drop($('.modal .filter__dropdown'), $('.modal .filter__inner'))
     $('.filter__inner-item').each(function () {
         $(this).click(function () {
             $(this).addClass('active');
@@ -465,8 +470,9 @@ function dropDown(){
             $(this).closest('.filter__item').find('input').val(current)
 
             $('.modal__dropdown .filter__header').css('color','#212121')
+            $(this).closest('.modal .filter__item ').find('.filter__header').text(current)
             if (window.innerWidth > 666) {
-                $(this).closest('.filter__item ').find('.filter__header').text(current)
+                $(this).closest('.filter .filter__item ').find('.filter__header').text(current)
             }
             // sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
 
@@ -600,12 +606,19 @@ function changeColorDropdown(){
 
 
 function changeProfileInfo() {
-    let arrProfile = [];
+    // let arrProfile = [];
+    let currentInput
+    let currentInputValue
 
     $('.profile__info-edit').click(function () {
+        currentInput = $(this).closest('.profile__info-input').find('input')
+        currentInputValue = currentInput.val()
         $(this).hide();
-        $(this).closest('.profile__info-input').find('input').prop('disabled', false).focus()
+        currentInput.prop('disabled', false).focus()
         $(this).next('.profile__info-btn').css('display','flex')
+
+        console.log(11234)
+
         // $('.info__form input').each(function () {
         //     arrProfile.push($(this).val());
         //     $(this).prop('disabled', false);
@@ -616,7 +629,8 @@ function changeProfileInfo() {
     });
 
     $('.profile__info-cancel').click(function () {
-        $(this).closest('.profile__info-input').find('input').prop('disabled', true)
+        currentInput.prop('disabled', true)
+        currentInput.val(currentInputValue)
         $(this).closest('.profile__info-input').find('.profile__info-edit').show();
         $(this).closest('.profile__info-btn').hide()
         // $('.info__form input').each(function (i) {
@@ -625,10 +639,18 @@ function changeProfileInfo() {
         // });
     });
     $('.profile__info-change').click(function () {
-        $(this).closest('.profile__info-input').find('input').prop('disabled', true)
+        $('.profile__info-input').find('input').prop('disabled', false)
         $(this).closest('.profile__info-input').find('.profile__info-edit').show();
         $(this).closest('.profile__info-btn').hide()
-        $(this).closest('.profile__info-input').find('input').val()
+
+        let newValue = currentInput.val()
+        currentInput.val(newValue)
+
+        let profileForm = $('.profile__info')
+        validateForm(profileForm, function () {
+            sendForm(profileForm, '/wp-admin/admin-ajax.php')
+        });
+
     })
 }
 
@@ -673,13 +695,16 @@ $(document).ready(function(){
         toogleModalWithoutClick(subsModal)
     });
 
+    //change password
+    let passwordForm = $('.password__form');
+    let passwordModal =$('.modal__password');
+    validateForm(passwordForm, function () {
+        sendForm(passwordForm, '/wp-admin/admin-ajax.php', function (){
+        });
+        toogleModalWithoutClick(passwordModal)
+    });
 
 
-    // let profileForm = $('.profile__info')
-    // validateForm(profileForm, function () {
-    //     sendForm(profileForm, '/wp-admin/admin-ajax.php'), function (){
-    //     }
-    // });
 
 
     let searchForm = $('.header__search-form')
@@ -689,11 +714,7 @@ $(document).ready(function(){
         }
     });
 
-    let passwordForm = $('.password__form');
-    validateForm(passwordForm, function () {
-        sendForm(passwordForm, '/wp-admin/admin-ajax.php');
-        toogleModalWithoutClick($('.modal__password'))
-    });
+
 
 
     let formEnter = $('.modal__form-enter');
@@ -706,15 +727,15 @@ $(document).ready(function(){
     validateForm(formRegister, function () {
         sendForm(formRegister, '/wp-admin/admin-ajax.php', registerSuccess, enterError);
 
-    $('.modal__enter-wrap').hide();
-    toogleModalWithoutClick($('.modal__reg-success'))
+        $('.modal__reg').hide();
+        toogleModalWithoutClick($('.modal__reg-success'))
     })
 
     // forgot password form
     let formForgot = $('.modal__form-forget');
     validateForm(formForgot, function () {
         sendForm(formForgot, '/wp-admin/admin-ajax.php');
-        $('.modal__forget-wrap').hide();
+        $('.modal__forget').hide();
         $('.modal__forget-mail').show();
     });
 });
