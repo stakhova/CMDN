@@ -53,7 +53,7 @@ function showSocial(){
 function filterActive (item) {
     item.click(function () {
         $(this).toggleClass('active');
-        console.log(1234)
+        console.log(1)
     });
 };
 
@@ -474,7 +474,7 @@ function dropDown(){
             if (window.innerWidth > 666) {
                 $(this).closest('.filter .filter__item ').find('.filter__header').text(current)
             }
-            // sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
+            sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
 
         });
     })
@@ -501,9 +501,11 @@ function showTickets(){
     $(document).on('change','.filter__select',function (){
         sendForm(filterForm, '/wp-admin/admin-ajax.php')
     })
-    $(document).on('change','.filter__sort .filter__header',function (){
-        sendForm(filterForm, '/wp-admin/admin-ajax.php')
-    })
+
+
+    // $(document).on('change','.shop .filter__header',function (){
+    //     sendForm(filterForm, '/wp-admin/admin-ajax.php')
+    // })
     filterForm.on("submit", function (e) {
         e.preventDefault();
         sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
@@ -513,6 +515,7 @@ function showTickets(){
     });
     filterForm.on("reset", function (e) {
         e.preventDefault();
+        console.log(234)
         $('.filter__sort-input').val('')
         $('.filter__datepicker').val('')
         $('.filter__datepicker').attr('placeholder','Date')
@@ -520,16 +523,17 @@ function showTickets(){
         // $('.filter__select option').each(function (){
         //     $(this).attr('selected','false')
         // })
-        $('.filter__select option:first-child').attr('selected','true')
+        $('.filter__select option').each(function (){
+            $(this).removeAttr('selected');
+        })
+        // $('.filter__select option:first-child').attr('selected','true')
+
         changeFilter()
 
         sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
             $('.filter__mob-wrap').removeClass('active')
         }
         $('.filter__inner-item').removeClass('active')
-        console.log('before',$('.filter__sort-input').val())
-
-        console.log('after',$('.filter__sort-input').val())
         $('.filter__mob-wrap').removeClass('active')
     });
 }
@@ -537,36 +541,35 @@ function showTickets(){
 
 
 
-// const ajaxGetProduct =(obj)=>{
-//     $.ajax({
-//         type: 'POST',
-//         url: '/wp-admin/admin-ajax.php',
-//         data: obj,
-//         success: function (res) {
-//             // $('.shop__main .shop__load').remove();
-//             // $('.shop__main .shop__list').append(res);
-//
-//         },
-//     });
-//
-// }
-//
-// let page = 1;
-// const loadMore = () =>{
-//     $(document).on('click', '.upcoming__load', function () {
-//         page++;
-//         // let formdata = $('.filter__form').serializeArray();
-//         const categories = $('.tickets__categories.active')
-//         const data = {};
-//         console.log(data,12345)
-//         // $(formdata).each(function(index, obj){
-//         //     data[obj.name] = obj.value;
-//         // });
-//         delete data.action;
-//         const obj = { ...data, page, categories, action:'loadmore'}
-//         ajaxGetProduct(obj);
-//     })
-// }
+const ajaxGetProduct =(obj)=>{
+    $.ajax({
+        type: 'POST',
+        url: '/wp-admin/admin-ajax.php',
+        data: obj,
+        success: function (res) {
+            // $('.shop__main .shop__load').remove();
+            $('.shop__block').append(res);
+        },
+    });
+
+}
+
+let page = 1;
+const loadMore = () =>{
+    $(document).on('click', '.shop__load', function () {
+        page++;
+        let formdata = $('.filter__form').serializeArray();
+        const categories = $('.tickets__categories.active')
+        const data = {};
+        console.log(data,12345)
+        $(formdata).each(function(index, obj){
+            data[obj.name] = obj.value;
+        });
+        delete data.action;
+        const obj = { ...data, page, categories, action:'loadmore'}
+        ajaxGetProduct(obj);
+    })
+}
 
 
 
@@ -685,7 +688,7 @@ $(document).ready(function(){
     changeContent($('.modal__reg-enter'), $('.modal__enter'));
     changeContent($('.modal__enter-forget'), $('.modal__forget'));
     toogleModal($('.header__user'), $('.modal__auth'));
-    // loadMore()
+    loadMore()
 
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');
