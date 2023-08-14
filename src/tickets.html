@@ -66,6 +66,8 @@
                                 </select>
                             </div>
                         </div>
+                        <input type="text" hidden name="categories" value="" class="tickets__categories-input">
+                        <input type="text" hidden name="page" value="1" class="page">
                         <div class="filter__mob-button">
                             <button type="submit" class="section__button filter__mob-show">Show (100)</button>
                             <button type="reset" class="filter__mob-reset">Reset changes</button>
@@ -76,16 +78,16 @@
                 </div>
                 <h3 class="tickets__categories-title">Categories</h3>
                 <div class="tickets__categories">
-                    <a href="#">blues</a>
-                    <a href="#">jazz</a>
-                    <a href="#">Latin</a>
-                    <a href="#">opera</a>
-                    <a href="#">harmony</a>
-                    <a href="#">lyrics</a>
-                    <a href="#">reggae</a>
-                    <a href="#">rock</a>
-                    <a href="#">electronic</a>
-                    <a href="#">electronic</a>
+                    <a href="#"><div class="tickets__categories-name">blues</div></a>
+                    <a href="#"><div class="tickets__categories-name">jazz</div></a>
+                    <a href="#"><div class="tickets__categories-name">Latin</div></a>
+                    <a href="#"><div class="tickets__categories-name">opera</div></a>
+                    <a href="#"><div class="tickets__categories-name">harmony</div></a>
+                    <a href="#"><div class="tickets__categories-name">lyrics</div></a>
+                    <a href="#"><div class="tickets__categories-name">reggae</div></a>
+                    <a href="#"><div class="tickets__categories-name">rock</div></a>
+                    <a href="#"><div class="tickets__categories-name">electronic</div></a>
+                    <a href="#"><div class="tickets__categories-name">electronic</div></a>
                 </div>
             </div>
         </section>
@@ -326,7 +328,7 @@
                         </li>
 
                     </ul>
-                    <button type="button" class="upcoming__load section__button">
+                    <button type="button" class="upcoming__load section__button section__load">
                         Load more
                     </du>
                 </button>

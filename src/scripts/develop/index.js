@@ -50,10 +50,20 @@ function showSocial(){
         $('.article__social').toggle()
     })
 }
-function filterActive (item) {
-    item.click(function () {
+function filterActive () {
+    $('.tickets__categories > *').click(function () {
         $(this).toggleClass('active');
-        console.log(1)
+        let activeTextArray = [];
+        $(".active .tickets__categories-name").each(function() {
+            let text = $(this).text();
+            activeTextArray.push(text);
+        });
+        $('.tickets__categories-input').val(activeTextArray)
+
+        let filterForm = $('.filter__form')
+        page = 1;
+        $('.page').val(page)
+        sendForm(filterForm, '/wp-admin/admin-ajax.php')
     });
 };
 
@@ -474,6 +484,8 @@ function dropDown(){
             if (window.innerWidth > 666) {
                 $(this).closest('.filter .filter__item ').find('.filter__header').text(current)
             }
+            page = 1;
+            $('.page').val(page)
             sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
 
         });
@@ -491,14 +503,48 @@ function filterMob(){
 }
 
 
+let page = 1;
+console.log(123,page)
+function loadMore(){
+    $(document).on('click', '.section__load', function () {
+        page++
+        $('.page').val(page)
+        console.log(222,page)
+        let form = $('.filter__form')
+        const formData = new FormData(form[0]);
+        $.ajax({
+            url: '/wp-admin/admin-ajax.php',
+            data: formData,
+            processData: false,
+            contentType: false,
+            method: 'POST',
+            success: function (res) {
+                console.log('success ajax');
+                $('.upcoming__block').html(res);
+
+            },
+            error: function (error) {
+                console.log('error', error);
+            },
+        });
+    })
+}
+
+
+
+
 function showTickets(){
     let filterForm = $('.filter__form')
 
-
     $(document).on('change','.filter__datepicker',function (){
+        page = 1;
+        $('.page').val(page)
         sendForm(filterForm, '/wp-admin/admin-ajax.php')
+
     })
     $(document).on('change','.filter__select',function (){
+        page = 1;
+        $('.page').val(page)
         sendForm(filterForm, '/wp-admin/admin-ajax.php')
     })
 
@@ -509,13 +555,16 @@ function showTickets(){
     filterForm.on("submit", function (e) {
         e.preventDefault();
         sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
+            page = 1;
+            $('.page').val(page)
             $('.filter__mob-wrap').removeClass('active')
         }
         $('.filter__mob-wrap').removeClass('active')
     });
     filterForm.on("reset", function (e) {
         e.preventDefault();
-        console.log(234)
+        page = 1;
+        $('.page').val(page)
         $('.filter__sort-input').val('')
         $('.filter__datepicker').val('')
         $('.filter__datepicker').attr('placeholder','Date')
@@ -531,6 +580,9 @@ function showTickets(){
         changeFilter()
 
         sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
+
+            page = 1;
+            $('.page').val(page)
             $('.filter__mob-wrap').removeClass('active')
         }
         $('.filter__inner-item').removeClass('active')
@@ -540,36 +592,6 @@ function showTickets(){
 
 
 
-
-const ajaxGetProduct =(obj)=>{
-    $.ajax({
-        type: 'POST',
-        url: '/wp-admin/admin-ajax.php',
-        data: obj,
-        success: function (res) {
-            // $('.shop__main .shop__load').remove();
-            $('.shop__block').append(res);
-        },
-    });
-
-}
-
-let page = 1;
-const loadMore = () =>{
-    $(document).on('click', '.shop__load', function () {
-        page++;
-        let formdata = $('.filter__form').serializeArray();
-        const categories = $('.tickets__categories.active')
-        const data = {};
-        console.log(data,12345)
-        $(formdata).each(function(index, obj){
-            data[obj.name] = obj.value;
-        });
-        delete data.action;
-        const obj = { ...data, page, categories, action:'loadmore'}
-        ajaxGetProduct(obj);
-    })
-}
 
 
 
@@ -671,7 +693,7 @@ $(document).ready(function(){
         $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', 'Search')
     })
     changeFilter()
-    filterActive($('.tickets__categories > *'))
+    filterActive()
     removeNews();
     search()
     filterActiveOne();
