@@ -14,7 +14,7 @@ function changeToMob() {
         let breadcrumbs = $('.breadcrumbs')
         $('.delivery').prepend(breadcrumbs)
         $('.article__social-wrap').prepend("<div class='article__social-button'></div>")
-
+        showSocial()
         const recommended = new Swiper('.article__recommended-slider', {
             slidesPerView: 1.5,
             spaceBetween: 20,
@@ -51,14 +51,14 @@ function showSocial(){
     })
 }
 function filterActive () {
-    $('.tickets__categories > *').click(function () {
+    $('.tickets__categories > a').click(function () {
         $(this).toggleClass('active');
         let activeTextArray = [];
         $(".active .tickets__categories-name").each(function() {
             let text = $(this).text();
             activeTextArray.push(text);
         });
-        $('.tickets__categories-input').val(activeTextArray)
+        $('.categories__input').val(activeTextArray)
 
         let filterForm = $('.filter__form')
         page = 1;
@@ -504,12 +504,10 @@ function filterMob(){
 
 
 let page = 1;
-console.log(123,page)
 function loadMore(){
     $(document).on('click', '.section__load', function () {
         page++
         $('.page').val(page)
-        console.log(222,page)
         let form = $('.filter__form')
         const formData = new FormData(form[0]);
         $.ajax({
@@ -529,8 +527,11 @@ function loadMore(){
         });
     })
 }
-
-
+function dropDesc(){
+    $('.oneticket__description-drop').click(function (){
+        $('.oneticket__description-inner').toggleClass('active')
+    })
+}
 
 
 function showTickets(){
@@ -569,13 +570,14 @@ function showTickets(){
         $('.filter__datepicker').val('')
         $('.filter__datepicker').attr('placeholder','Date')
         $('.select2-selection__rendered').attr('placeholder','Date')
-        // $('.filter__select option').each(function (){
-        //     $(this).attr('selected','false')
-        // })
+        $('.tickets__categories > a').each(function (){
+            $(this).removeClass('active')
+        })
         $('.filter__select option').each(function (){
             $(this).removeAttr('selected');
         })
-        // $('.filter__select option:first-child').attr('selected','true')
+        $('.categories__input').val('')
+
 
         changeFilter()
 
@@ -692,12 +694,12 @@ $(document).ready(function(){
     }).on('select2:opening', function(e) {
         $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', 'Search')
     })
+    dropDesc()
     changeFilter()
     filterActive()
     removeNews();
     search()
     filterActiveOne();
-    showSocial()
     calendar()
     dropDown()
     goBack()

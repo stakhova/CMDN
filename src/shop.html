@@ -52,7 +52,9 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="text" hidden name="categories" value="" class="tickets__categories-input">
+                        <input type="text" hidden name="action" value="show__item">
+                        <input type="text" hidden name="categories" value="" class="categories__input">
+                        <input type="text" hidden name="page" value="1" class="page">
                         <div class="filter__mob-button">
                             <button type="submit" class="section__button filter__mob-show">Show (100)</button>
                             <button type="reset" class="filter__mob-reset">Reset changes</button>
@@ -157,7 +159,7 @@
                             </div>
                         </li>
                     </ul>
-                    <button class="section__button shop__load">
+                    <button class="section__button section__load shop__load">
                         load more
                     </button>
                 </div>
