@@ -17,7 +17,21 @@ function changeToMob() {
         showSocial()
         const recommended = new Swiper('.article__recommended-slider', {
             slidesPerView: 1.5,
-            spaceBetween: 20,
+            spaceBetween: 10,
+            centeredSlides: false,
+
+            loop: true,
+            navigation: {
+                nextEl: ".main__next",
+                prevEl: ".main__prev"
+            }
+
+        });
+
+
+        const bandUpcoming= new Swiper('.band .upcoming__block', {
+            slidesPerView: 1.5,
+            spaceBetween: 10,
             centeredSlides: false,
 
             loop: true,
@@ -29,7 +43,7 @@ function changeToMob() {
         });
         const related = new Swiper('.related-slider', {
             slidesPerView: 1.5,
-            spaceBetween: 20,
+            spaceBetween: 10,
             centeredSlides: false,
 
             loop: true,
@@ -534,6 +548,34 @@ function dropDesc(){
 }
 
 
+function copyUrlHandler() {
+    $(document).on('click', '[data-copy]', function () {
+        const url = location.href;
+        navigator.clipboard.writeText(url);
+    });
+}
+
+function shareButton(){
+    $(document).on('click', '.article__social-item', function () {
+        const searchUrl = $(this).attr('data-url-search');
+        const searchTitle = $(this).attr('data-title');
+        console.log(searchTitle);
+        if (navigator.share) {
+            navigator.share({
+                title: searchTitle,
+                text: searchTitle,
+                url: searchUrl,
+            })
+                .then(() => console.log('Successful share'))
+                .catch(error => console.log('Error sharing:', error));
+        }
+        else {
+            $('.share__icon.share-button').css('display','none');
+            console.log('Your Browser doesnt support Web Share API')
+        }
+    });
+}
+
 function showTickets(){
     let filterForm = $('.filter__form')
 
@@ -644,15 +686,6 @@ function changeProfileInfo() {
         currentInput.prop('disabled', false).focus()
         $(this).next('.profile__info-btn').css('display','flex')
 
-        console.log(11234)
-
-        // $('.info__form input').each(function () {
-        //     arrProfile.push($(this).val());
-        //     $(this).prop('disabled', false);
-        // });
-        // $('.info__form input[type^="password"]').prop('disabled', true);
-        //
-        // $('.info__form-button').css('display', 'flex');
     });
 
     $('.profile__info-cancel').click(function () {
@@ -660,10 +693,6 @@ function changeProfileInfo() {
         currentInput.val(currentInputValue)
         $(this).closest('.profile__info-input').find('.profile__info-edit').show();
         $(this).closest('.profile__info-btn').hide()
-        // $('.info__form input').each(function (i) {
-        //     $(this).prop('disabled', true);
-        //     $(this).val(arrProfile[i]);
-        // });
     });
     $('.profile__info-change').click(function () {
         $('.profile__info-input').find('input').prop('disabled', false)
@@ -713,6 +742,8 @@ $(document).ready(function(){
     changeContent($('.modal__enter-forget'), $('.modal__forget'));
     toogleModal($('.header__user'), $('.modal__auth'));
     loadMore()
+    copyUrlHandler()
+    // shareButton()
 
     let subsForm = $('.subs__form');
     let subsModal = $('.modal__subs');

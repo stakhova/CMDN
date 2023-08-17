@@ -3,7 +3,7 @@
 <div class="wrap">
     //= partials/header.html
 
-    <main class="wrap__main" >
+    <main class="wrap__main venue" >
         <section class="breadcrumbs__wrap">
             <div class="container">
                 <div class="breadcrumbs breadcrumbs__relative">
@@ -14,7 +14,7 @@
             </div>
         </section>
 
-        <section class="article venue">
+        <section class="article">
             <div class="container">
                 <div class="article__back">
                     <button></button>
@@ -26,21 +26,21 @@
                     <div class="article__social-wrap">
                         <div class="article__social">
                             <span>Share</span>
-                            <div  class="article__social-item img article__instagram">
+                            <a  class="article__social-item img article__instagram">
                                 <img src="img/instagram.svg" alt="">
-                            </div>
-                            <div class="article__social-item img article__twitter">
+                            </a>
+                            <a class="article__social-item img article__twitter">
                                 <img src="img/twitter.svg" alt="">
-                            </div>
-                            <div class="article__social-item img article__facebook">
+                            </a>
+                            <a class="article__social-item img article__facebook">
                                 <img src="img/facebook.svg" alt="">
-                            </div>
-                            <div class="article__social-item img article__whatsapp">
+                            </a>
+                            <a class="article__social-item img article__whatsapp">
                                 <img src="img/whatsapp.svg" alt="">
-                            </div>
-                            <div class="article__social-item img article__copy">
+                            </a>
+                            <a class="article__social-item img article__copy" data-copy>
                                 <img src="img/link.svg" alt="">
-                            </div>
+                            </a>
                         </div>
                     </div>
                     <div class="article__categories tickets__categories">
@@ -64,12 +64,17 @@
                         <p>Within the House, you can find the Vaughan Williams Memorial Library, England’s national folk music and dance archive. The Library is open to visitors (if you ever fancy hearing someone from 1910 singing songs about flowers).</p>
                         <img src="img/article-img.png" alt="">
                         <div class="article__recommended">
-                            <h3 class="section__title">RECOMENDED POSTS</h3>
+                            <div class="article__recommended-flex" >
+                                <h3 class="section__title">RECOMENDED POSTS</h3>
+                                <div class="article__recommended-btn">
+                                    <div class="swiper-button-prev main__prev"></div>
+                                    <div class="swiper-button-next main__next"></div>
+                                </div>
+                            </div>
                             <div class="article__recommended-slider swiper-container">
                                 <ul class="article__recommended-list swiper-wrapper">
                                     <li class="blog__item swiper-slide" >
                                         <div class="blog__item-img img">
-                                            <span class="blog__item-flash">Latest Posts</span>
                                             <img src="img/post2.png" alt="">
                                         </div>
                                         <div class="blog__item-text">
@@ -81,7 +86,6 @@
                                     </li>
                                     <li class="blog__item swiper-slide" >
                                         <div class="blog__item-img img">
-                                            <span class="blog__item-flash">Latest Posts</span>
                                             <img src="img/post2.png" alt="">
                                         </div>
                                         <div class="blog__item-text">
@@ -93,7 +97,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <button class="article__view section__button">
+                            <button class="article__view section__button section__btn">
                                 View all
                             </button>
                         </div>
@@ -126,7 +130,13 @@
         <section class="recommended related ">
             <div class="container">
                 <div class="related__container">
-                    <h2 class="section__title">Related Live Shows</h2>
+                    <div class="article__recommended-flex" >
+                        <h3 class="section__title">Related Live Shows</h3>
+                        <div class="article__recommended-btn">
+                            <div class="swiper-button-prev main__prev"></div>
+                            <div class="swiper-button-next main__next"></div>
+                        </div>
+                    </div>
                     <div class="related-slider swiper-container">
                         <ul class="tickets__list swiper-wrapper">
                         <li class="tickets__item swiper-slide">
