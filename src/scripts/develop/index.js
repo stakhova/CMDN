@@ -1,3 +1,33 @@
+let map;
+
+async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
+
+    map = new Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+
+    });
+    const markerIcon = {
+        url: `${window.location.href}/img/maps.svg`,
+        scaledSize: new google.maps.Size(21, 30),
+    };
+    let marker = new google.maps.Marker({
+        position: { lat: -34.397, lng: 150.644  },
+        map: map,
+        icon: markerIcon,
+        title: '12356',
+    });
+
+
+}
+
+
+
+
+
+
+
 
 const openMenu = () => {
     $('.header__burger').toggleClass("header__burger-open");
@@ -9,13 +39,25 @@ function changeToMob() {
     if (window.innerWidth <= 666) {
         $('.article__back button').text('')
         $('.header__menu .header__logo').closest('li').remove()
-        $('.music__more').text('Go to the all posts')
+        // $('.music__more').text('Go to the all posts')
         initSlider()
         let breadcrumbs = $('.breadcrumbs')
         $('.delivery').prepend(breadcrumbs)
         $('.article__social-wrap').prepend("<div class='article__social-button'></div>")
         showSocial()
         const recommended = new Swiper('.article__recommended-slider', {
+            slidesPerView: 1.5,
+            spaceBetween: 10,
+            centeredSlides: false,
+
+            loop: true,
+            navigation: {
+                nextEl: ".main__next",
+                prevEl: ".main__prev"
+            }
+
+        });
+        const showRelated = new Swiper('.show .upcoming__block', {
             slidesPerView: 1.5,
             spaceBetween: 10,
             centeredSlides: false,
@@ -534,6 +576,9 @@ function loadMore(){
                 console.log('success ajax');
                 $('.upcoming__block').html(res);
 
+                $('.music__more').remove()
+                $('.music__block').append(res);
+
             },
             error: function (error) {
                 console.log('error', error);
@@ -542,8 +587,8 @@ function loadMore(){
     })
 }
 function dropDesc(){
-    $('.oneticket__description-drop').click(function (){
-        $('.oneticket__description-inner').toggleClass('active')
+    $('.oneproduct__description-drop').click(function (){
+        $('.oneproduct__description-inner').toggleClass('active')
     })
 }
 
@@ -743,6 +788,7 @@ $(document).ready(function(){
     toogleModal($('.header__user'), $('.modal__auth'));
     loadMore()
     copyUrlHandler()
+    toogleModal($('.shows__map'),$('.modal__map') )
     // shareButton()
 
     let subsForm = $('.subs__form');
@@ -796,6 +842,7 @@ $(document).ready(function(){
         $('.modal__forget').hide();
         $('.modal__forget-mail').show();
     });
+    initMap()
 });
 
 $(window).load(function(){

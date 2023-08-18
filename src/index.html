@@ -280,6 +280,10 @@
             <div class="container">
                 <h2 class="section__title">DISCOVER MUSIC YOU NEED TO HEAR</h2>
                 <div class="music__block">
+                    <form action="" class="filter__form">
+                        <input type="text" hidden name="action" value="load_more_band">
+                        <input type="text" hidden name="page" value="1" class="page">
+                    </form>
                     <ul class="music__list">
                         <li class="music__item">
                             <div class="music__img img">
@@ -317,9 +321,8 @@
                                 <a class="music__link" href="">Read more</a>
                             </div>
                         </li>
-
                     </ul>
-                    <button class="section__button music__more">Load More</button>
+                    <button class="section__button music__more section__load">Load More</button>
                 </div>
             </div>
         </section>

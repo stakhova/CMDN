@@ -138,6 +138,7 @@
     justify-content: center;
     align-items: center;
     gap: 4rem;
+    //margin-left: 11rem;
   }
   &__logo{
     display: block;
@@ -387,10 +388,9 @@
 .section{
   &__title{
     text-align: center;
-    font: 700 3.6rem/6.5rem var(--Moul);
+    font: 400 3.6rem/6.5rem var(--Moul);
     text-transform: uppercase;
   }
-
   &__button {
     display: flex;
     justify-content: center;
@@ -435,6 +435,11 @@
     justify-content: center;
     &:after{
       display: none;
+    }
+    &:hover{
+      color: var(--color-white);
+      background-color: var(--color-primary-second);
+
     }
   }
 }
@@ -637,13 +642,16 @@
     height: auto;
     z-index: 0;
   }
+  .section__title{
+    margin-bottom: 4rem;
+  }
   &__list{
     display: flex;
     flex-wrap: wrap;
     gap:3rem;
     position: relative;
     z-index: 1;
-    margin: 4rem 0 3rem;
+    margin-bottom: 3rem;
   }
   &__item{
     width: calc((100% - 9rem)/4);
@@ -703,6 +711,7 @@
     color: var(--color-primary);
     text-transform: uppercase;
     font: 700 1.2rem/1.5rem var(--Montserrat);
+
   }
 
 }
@@ -1426,6 +1435,9 @@
   .container{
     padding: 0 5.5rem 7rem;
   }
+  &__view{
+    margin: 3rem auto 0 ;
+  }
   &__subtitle{
     margin-bottom: 4rem;
 
@@ -1735,6 +1747,7 @@
     }
     a{
       position: relative;
+      cursor: pointer;
       &:after{
         content: "";
         bottom: 0;
@@ -2204,6 +2217,62 @@
   }
 }
 
+
+.show{
+  .recommended .section__title, .upcoming .section__title{
+    font-size: 2.4rem;
+    line-height: 160%;
+  }
+  .upcoming .container{
+    padding-bottom: 0;
+  }
+  .recommended .container {
+    padding: 3rem 5.5rem;
+    &:before{
+      content: "";
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      width: calc(100% - 11rem);
+      height: 0.2rem;
+      background-color: #E5D9C3;
+      pointer-events: none;
+    }
+  }
+  .blog__item-img{
+    height: 21.4rem ;
+  }
+  .upcoming__load{
+    margin-top: 3rem;
+  }
+  &__recommended{
+    display: flex;
+    gap:2rem;
+    align-items: center;
+    width: 100%;
+    margin-top: 5rem;
+    &-img{
+      width: 50%;
+      max-height: 31.9rem;
+      overflow: hidden;
+
+    }
+    &-text{
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap:2rem;
+      h2{
+        text-transform: uppercase;
+        font: 400 2.4rem/4.3rem var(--Moul);
+      }
+      p{
+        font: 500 1.6rem/160% var(--Montserrat);
+      }
+    }
+  }
+}
 
 .band {
   .article__container{
@@ -2861,6 +2930,16 @@ input:-internal-autofill-selected{
   top: 0;
   left: 0;
   z-index: 4;
+
+  &__map{
+    .modal__overflow{
+      padding: 0;
+    }
+    .map{
+      width: 100%;
+      height: 90vh;
+    }
+  }
   &__password{
     .modal__title>*{
       font-size: 1.8rem;
@@ -3108,6 +3187,9 @@ input:-internal-autofill-selected{
     max-height: 90vh;
     transform: translate(-50%, -50%);
     z-index: 6;
+    &-full{
+      max-width: 117rem;
+    }
 
   }
   &__overflow{
@@ -3196,7 +3278,7 @@ label.error{
     }
   }
 }
-.oneticket{
+.oneproduct{
   .container{
     padding: 5rem 5.5rem 7rem;
     position: relative;
@@ -3218,8 +3300,32 @@ label.error{
     display: flex;
     flex-direction: column;
     gap:1rem;
-    & > *{
+    & > p{
       font: 500 1.6rem/160% var(--Montserrat);
+    }
+    & > h2{
+      font: 600 1.6rem/2rem var(--Montserrat);
+      margin: 0.4rem 0;
+    }
+    li{
+      font: 500 1.6rem/160% var(--Montserrat);
+      position: relative;
+      padding-left: 1.4rem;
+      &:not(:last-child){
+        margin-bottom: 1rem;
+      }
+      &:after{
+        content: '';
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 0.4rem;
+        height: 0.4rem;
+        background-color: var(--color-black);
+        border-radius: 50%;
+
+      }
     }
     strong{
       font-weight: 600;
@@ -3338,6 +3444,20 @@ label.error{
       }
     }
   }
+  &__related{
+    .container{
+      padding: 0 5.5rem 7rem;
+    }
+    &-title{
+      text-align: center;
+      margin-bottom: 3rem;
+      font: 400 2.4rem/160% var(--Moul);
+      text-transform: uppercase;
+    }
+    .shop__list{
+      margin: 0;
+    }
+  }
 }
 
 @media only screen and (max-width: 1920px) {
@@ -3370,8 +3490,18 @@ label.error{
   .bands__img{
     height: 23.1vw;
   }
-  .oneticket__bottom-img {
+  .oneproduct__bottom-img {
     height: 25vw;
+  }
+  .modal__content-full{
+    max-width: calc(100vw - 6rem);
+  }
+  .modal__map .modal__content-full{
+    height: calc(100vh - 8rem);
+  }
+  .modal__map .modal__overflow{
+    max-height:100%;
+    height: 100%;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -3461,6 +3591,7 @@ label.error{
   }
   .music__list{
     gap:1rem;
+    margin-bottom: 1rem;
   }
   .music__item{
   width: calc(50% - 0.5rem);
@@ -4558,44 +4689,45 @@ label.error{
     line-height: 2.2rem;
     margin-bottom: 1rem;
   }
-  .oneticket__block{
+  .oneproduct__block{
     flex-direction: column;
   }
-  .oneticket__block > *{
+  .oneproduct__block > *{
     width: 100%;
   }
-  .oneticket__description-drop{
+  .oneproduct__description-drop{
     padding: 1rem 3rem 1rem 0;
     font-size: 1.8rem;
     line-height: 3.3rem;
   }
-  .oneticket__description-inner.active{
+  .oneproduct__description-inner.active{
     margin-top: 1.4rem;
   }
-  .oneticket__description-inner > p{
+  .oneproduct__description-inner > p{
     font-size: 1.4rem;
   }
-  .oneticket__bottom > *{
+  .oneproduct__bottom > *{
     font-size: 1.4rem;
   }
-  .oneticket__bottom-img{
+  .oneproduct__bottom-img{
     height: 56vw;
     margin:0 -1.6rem ;
   }
-  .oneticket__description,.oneticket__text{
+  .oneproduct__description,.oneproduct__text{
     margin-top: 1.4rem;
   }
-  .oneticket__text > *{
+  .oneproduct__text > *{
     font-size: 1.4rem;
   }
-  .oneticket__address{
+  .oneproduct__address{
     gap:1rem
   }
-  .oneticket .container{
+  .oneproduct .container{
     padding: 0 1.6rem;
   }
-  .oneticket .article__social-button{
+  .oneproduct .article__social-wrap{
     right: 1.6rem;
+    z-index: 2;
   }
   .band .social__item{
     width: calc((100% - 2rem)/3);
@@ -4647,7 +4779,98 @@ label.error{
   .band .blog__item-img{
     height: 35vw;
   }
+  .show__recommended{
+    flex-direction: column;
+    margin-top: 2rem;
+
+  }
+  .show__recommended-text{
+    width: 100%;
+  }
+  .show__recommended-img{
+    margin: 0 -1.6rem;
+    width: 100vw;
+    height: 56vw;
+  }
+  .show__recommended-text h2{
+    font-size: 1.8rem;
+    line-height: 3.3rem;
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+  .bands .container{
+    padding: 2rem 1.6rem 3rem;
+  }
+  .show__recommended-text{
+    gap:1rem;
+    p{
+      font-size: 1.4rem;
+    }
+  }
+  .show .recommended .container, .show .upcoming .container{
+    padding: 2rem 0 2rem 1.6rem;
+  }
+  .show .recommended .section__title, .show .upcoming .section__title{
+    font-size: 1.8rem;
+  }
+  .show .blog__item-img{
+    height: 35vw;
+  }
+  .show .recommended .container:before{
+    width: calc(100% - 3.2rem);
+  }
+  .show .upcoming .tickets__list{
+    flex-direction: unset;
+    gap:0;
+    flex-wrap: unset;
+  }
+  .show .upcoming .tickets__img{
+    height: 68vw;
+  }
+  .show .upcoming__load{
+    margin-top: 2rem;
+  }
+  .show .upcoming .container{
+    padding-bottom: 0;
+  }
+  .bands__view{
+    min-width: 34.3rem;
+    width: 100%;
+  }
+  .oneproduct__related .shop__item{
+    width: 100%;
+  }
+  .oneproduct__related .shop__img{
+    height: 105vw;
+  }
+  .oneproduct__related-title{
+    font-size: 1.8rem;
+    line-height: 3.3rem;
+    margin-bottom: 1rem;
+  }
+  .oneproduct__related .container{
+    margin-top: 2rem;
+    padding: 2rem 1.6rem 5rem;
+    position: relative;
+    &:after{
+      content: '';
+      position: absolute;
+      width: calc(100% - 3.2rem);
+      height: 0.2rem;
+      background-color: var(--color-back-dark) ;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+  }
+  .oneproduct__text > p,.oneproduct__text > h2, .oneproduct__text li{
+    font-size: 1.4rem;
+  }
+
 }
+
+
 
 
 @media only screen and (max-width: 374px) {
@@ -4661,8 +4884,9 @@ label.error{
     min-width: auto;
     width: 100%;
   }
-  .article__view, .shop__load,.music__more,.section__btn{
-    min-width: 100%;
+  .section__btn, .section__button {
+    min-width: auto;
+    width: max-content;
   }
   .modal__checkbox .form-group label{
     padding-left: 2.4rem;
