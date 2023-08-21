@@ -30,6 +30,12 @@ const openMenu = () => {
     $('body').toggleClass('hidden');
 };
 
+
+function showMap(){
+    $(document).on('click','.article__social-wrap', function (){
+        $('.article__social').toggle()
+    })
+}
 function changeToMob() {
     if (window.innerWidth <= 666) {
         $('.article__back button').text('')
@@ -37,7 +43,15 @@ function changeToMob() {
         // $('.music__more').text('Go to the all posts')
         initSlider()
         let breadcrumbs = $('.breadcrumbs')
-        $('.delivery').prepend(breadcrumbs)
+
+        if(window.location.href.includes('shows') || window.location.href.includes('tickets')){
+            $('.delivery').prepend(breadcrumbs)
+            breadcrumbs.css('background','#EAE1CF')
+        } else{
+            $('.delivery').append(breadcrumbs)
+            breadcrumbs.css('background','#EAE1CF')
+        }
+
         $('.article__social-wrap').prepend("<div class='article__social-button'></div>")
         showSocial()
         const recommended = new Swiper('.article__recommended-slider', {
@@ -324,6 +338,7 @@ function resetForm() {
     $('.modal__reg-success').hide();
     $('.modal__reg').hide();
     $('.modal__enter').show();
+    $('.label').removeClass('active')
 }
 
 // change content in modal window
@@ -488,7 +503,6 @@ function dropDown(){
             sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php', function (res){
                 filterSuccess(res)
             })
-
         });
     })
 }
@@ -718,17 +732,21 @@ function changeProfileInfo() {
         $(this).closest('.profile__info-btn').hide()
     });
     $('.profile__info-change').click(function () {
-        $('.profile__info-input').find('input').prop('disabled', false)
+
         $(this).closest('.profile__info-input').find('.profile__info-edit').show();
         $(this).closest('.profile__info-btn').hide()
 
         let newValue = currentInput.val()
         currentInput.val(newValue)
+        $('.profile__info-input').find('input').prop('disabled', false)
 
         let profileForm = $('.profile__info')
         validateForm(profileForm, function () {
-            sendForm(profileForm, '/wp-admin/admin-ajax.php')
+            sendForm(profileForm, '/wp-admin/admin-ajax.php', function (){
+                $('.profile__info-input').find('input').prop('disabled', true)
+            })
         });
+
 
     })
 }
@@ -782,8 +800,9 @@ $(document).ready(function(){
     let passwordModal =$('.modal__password');
     validateForm(passwordForm, function () {
         sendForm(passwordForm, '/wp-admin/admin-ajax.php', function (){
+            toogleModalWithoutClick(passwordModal)
         });
-        toogleModalWithoutClick(passwordModal)
+
     });
 
 
