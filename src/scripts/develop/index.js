@@ -1,26 +1,68 @@
 let map;
 
-async function initMap() {
-    const { Map } = await google.maps.importLibrary("maps");
-
-    map = new Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
+function initMap() {
+    const myLatLng = { lat: -25.363, lng: 131.044 };
+    const mapOptions = {
         zoom: 8,
-
-    });
-    const markerIcon = {
-        url: `${window.location.href}/img/maps.svg`,
-        scaledSize: new google.maps.Size(21, 30),
+        center: myLatLng,
     };
-    let marker = new google.maps.Marker({
-        position: { lat: -34.397, lng: 150.644  },
+
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    const marker = new google.maps.Marker({
+        position: myLatLng,
         map: map,
-        icon: markerIcon,
-        title: '12356',
+        url: `${window.location.href}/img/maps.svg`,
+    });
+    const infowindow = new google.maps.InfoWindow({
+        content: "<p>Marker Location:" + marker.getPosition() + "</p>",
     });
 
-
+    google.maps.event.addListener(marker, "mouseover", () => {
+        infowindow.open(map, marker);
+    });
+    google.maps.event.addListener(marker, "mouseout", () => {
+        infowindow.close(map, marker);
+    });
 }
+//
+// function initMap() {
+//     const myLatLng = { lat: -25.363, lng: 131.044 };
+//     const map = new google.maps.Map(document.getElementById("map"), {
+//         zoom: 4,
+//         center: myLatLng,
+//     });
+//
+//
+//     new google.maps.Marker({
+//         position: myLatLng,
+//         map,
+//         title: "12345!",
+//     });
+// }
+
+//
+// async function initMap() {
+//     const { Map } = await google.maps.importLibrary("maps");
+//     const myLatlng = { lat: -25.363, lng: 131.044 };
+//     map = new Map(document.getElementById("map"), {
+//         center: myLatlng,
+//         zoom: 8,
+//
+//     });
+//     const markerIcon = {
+//         url: `${window.location.href}/img/maps.svg`,
+//         scaledSize: new google.maps.Size(21, 30),
+//
+//     };
+//     let marker = new google.maps.Marker({
+//         position: myLatlng,
+//         map: map,
+//         icon: markerIcon,
+//         title: '12356',
+//     });
+//
+// }
 
 
 
@@ -32,10 +74,13 @@ const openMenu = () => {
 
 
 function showMap(){
-    $(document).on('click','.article__social-wrap', function (){
-        $('.article__social').toggle()
+    $('.shows__map').click(function (){
+        const map = $(this).attr('data-map')
+        console.log(map)
+        // $('.modal__map .modal__overflow').append(map)
     })
 }
+
 function changeToMob() {
     if (window.innerWidth <= 666) {
         $('.article__back button').text('')
@@ -764,6 +809,7 @@ $(document).ready(function(){
     }).on('select2:opening', function(e) {
         $(this).data('select2').$dropdown.find(':input.select2-search__field').attr('placeholder', 'Search')
     })
+    showMap()
     dropDesc()
     changeFilter()
     filterActive()
