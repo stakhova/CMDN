@@ -24,11 +24,6 @@ async function initMap() {
 
 
 
-
-
-
-
-
 const openMenu = () => {
     $('.header__burger').toggleClass("header__burger-open");
     $('.header__menu').toggleClass('header__menu-show');
@@ -119,7 +114,9 @@ function filterActive () {
         let filterForm = $('.filter__form')
         page = 1;
         $('.page').val(page)
-        sendForm(filterForm, '/wp-admin/admin-ajax.php')
+        sendForm(filterForm, '/wp-admin/admin-ajax.php', function(res){
+            filterSuccess(res)
+        } )
     });
 };
 
@@ -163,63 +160,6 @@ function initSlider () {
         });
     });
 }
-
-//
-// function mySwiper() {
-//
-//     // Variables
-//
-//     // var $swiperContainer = $(".swiper-js-container");
-//
-//
-//     function init($this) {
-//
-//         // Swiper elements
-//
-//         var $el = $('.swiper-container')
-//
-//
-//
-//         var $swiper = new Swiper($el, {
-//             slidesPerView: 1,
-//             spaceBetween: 10,
-//             loop: true,
-//             breakpoints: {
-//                 767: {
-//                     slidesPerView: 1
-//                 },
-//                 1024: {
-//                     slidesPerView: 2
-//                 },
-//                 1270: {
-//                     slidesPerView: 1
-//                 }
-//             },
-//             pagination: {
-//                 el: pagination,
-//                 clickable: true,
-//                 type: paginationType
-//             },
-//             navigation: {
-//                 nextEl: navNext,
-//                 prevEl: navPrev,
-//             }
-//         });
-//
-//     }
-//
-//     // Events
-//     //$(document).ready(function() {
-//     if ($el.length) {
-//         $el.each(function(i, Slider) {
-//             init($(Slider));
-//         })
-//     }
-//     //});
-//
-//
-// };
-
 
 
 function showLabel(){
@@ -325,14 +265,17 @@ const validateForm = (form, func) => {
 };
 
 
+
+
+
 // create ajax
-function ajaxSend(date, url, func,funcError) {
+function ajaxSend(date, url, funcSuccess,funcError) {
     $.ajax({
         url: url,
         data: date,
         method: 'POST',
         success: function (data) {
-            func(data);
+            funcSuccess(data);
         },
         error: function (error) {
             funcError(error)
@@ -344,9 +287,9 @@ function ajaxSend(date, url, func,funcError) {
 }
 
 // send form
-function sendForm(form, url, func,funcError) {
+function sendForm(form, url, funcSuccess,funcError) {
     form = form.serialize();
-    ajaxSend(form, url, func,funcError);
+    ajaxSend(form, url, funcSuccess,funcError);
 }
 
 
@@ -542,7 +485,9 @@ function dropDown(){
             }
             page = 1;
             $('.page').val(page)
-            sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php')
+            sendForm( $('.filter__form'), '/wp-admin/admin-ajax.php', function (res){
+                filterSuccess(res)
+            })
 
         });
     })
@@ -556,6 +501,16 @@ function filterMob(){
     $(document).on('click','.filter__mob-close', function (){
         $('.filter__mob-wrap').removeClass('active')
     })
+}
+
+
+
+function filterSuccess(res){
+    $('.shop__block').html(res);
+    $('.shows__block').html(res);
+    $('.recommended').remove()
+    $('.upcoming').remove()
+    $('.tickets').after(res)
 }
 
 
@@ -574,10 +529,25 @@ function loadMore(){
             method: 'POST',
             success: function (res) {
                 console.log('success ajax');
-                $('.upcoming__block').html(res);
+                // $('.upcoming__block').html(res);
 
+
+                //front page
                 $('.music__more').remove()
                 $('.music__block').append(res);
+
+                //shows page
+                $('.shows__load').remove()
+                $('.shows__block').append(res);
+
+                //shop page
+                $('.shop__load').remove()
+                $('.shop__block').append(res);
+
+                // blog page
+                $('.blog__load').remove()
+                $('.blog__block').append(res);
+
 
             },
             error: function (error) {
@@ -586,6 +556,7 @@ function loadMore(){
         });
     })
 }
+
 function dropDesc(){
     $('.oneproduct__description-drop').click(function (){
         $('.oneproduct__description-inner').toggleClass('active')
@@ -627,8 +598,14 @@ function showTickets(){
     $(document).on('change','.filter__datepicker',function (){
         page = 1;
         $('.page').val(page)
-        sendForm(filterForm, '/wp-admin/admin-ajax.php')
+        console.log(45678)
+        sendForm(filterForm, '/wp-admin/admin-ajax.php',function (res){
+            //shows page
+            $('.shows__block > *').remove()
+            $('.shows__block').html(res)
 
+            //tickets page
+        })
     })
     $(document).on('change','.filter__select',function (){
         page = 1;
@@ -668,11 +645,12 @@ function showTickets(){
 
         changeFilter()
 
-        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (){
-
+        sendForm(filterForm, '/wp-admin/admin-ajax.php'), function (res){
             page = 1;
             $('.page').val(page)
             $('.filter__mob-wrap').removeClass('active')
+
+            filterSuccess(res)
         }
         $('.filter__inner-item').removeClass('active')
         $('.filter__mob-wrap').removeClass('active')

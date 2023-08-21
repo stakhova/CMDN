@@ -24,6 +24,10 @@
         <section class="blog">
             <div class="container">
                 <h2 class="section__title">Blog</h2>
+                <form action="" class="filter__form">
+                    <input type="text" hidden name="action" value="load_more_blog">
+                    <input type="text" hidden name="page" value="1" class="page">
+                </form>
                 <div class="blog__display">
                     <div class="blog__display-menu active blog__display-item"></div>
                     <div class="blog__display-list blog__display-item"></div>
@@ -79,7 +83,7 @@
                             </div>
                         </li>
                     </ul>
-                    <button class="blog__load section__button">
+                    <button class="blog__load section__load section__button">
                         Load more
                     </button>
                 </div>
